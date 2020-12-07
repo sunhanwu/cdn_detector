@@ -11,6 +11,10 @@ def dns_query(doname, type, server):
     :return: 如果是A类型的话，返回对应IP， 如果是CNAME类型的话返回对应的域名
     """
     try:
-        result = dns.resolver(doname, type)
+        myResolver = dns.resolver.Resolver()
+        myResolver.nameservers = server
+        result = myResolver.resolver(doname, type)
+    except:
+        return None
 
 
