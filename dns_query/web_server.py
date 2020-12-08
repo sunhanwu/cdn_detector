@@ -15,14 +15,17 @@ class QueryHandler(tornado.web.RequestHandler):
         :param kwargs: 参数
         :return: None
         """
-        print(self.request.uri)
-        # 获取domain参数值
-        domain = self.get_query_argument("domain")
-        # 调用dns_query进行dns查询
-        cname, a = dns_query_all_servers(domain)
-        # 向resopnse写入字典信息，{'cname':cname, 'a':a}
-        print("cname:{}, a:{}".format(cname, a))
-        self.write({'cname': cname, 'a': a})
+        try:
+            print(self.request.uri)
+            # 获取domain参数值
+            domain = self.get_query_argument("domain")
+            # 调用dns_query进行dns查询
+            cname, a = dns_query_all_servers(domain)
+            # 向resopnse写入字典信息，{'cname':cname, 'a':a}
+            print("cname:{}, a:{}".format(cname, a))
+            self.write({'cname': cname, 'a': a})
+        except Exception as e:
+            super().write_error(status_code=408, **kwargs)
 
 
 class Application(tornado.web.Application):
