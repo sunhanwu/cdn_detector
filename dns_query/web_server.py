@@ -21,6 +21,7 @@ class QueryHandler(tornado.web.RequestHandler):
         # 调用dns_query进行dns查询
         cname, a = dns_query_all_servers(domain)
         # 向resopnse写入字典信息，{'cname':cname, 'a':a}
+        print("cname:{}, a:{}".format(cname, a))
         self.write({'cname': cname, 'a': a})
 
 
