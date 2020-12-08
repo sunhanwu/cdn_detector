@@ -3,7 +3,7 @@ Author: sunhanwu
 Date: 2020-12-07
 """
 import dns.resolver
-from config import serverNames, dns_timeout
+from config import serverNames, dns_timeout, ip2name
 import multiprocessing
 
 
@@ -41,7 +41,7 @@ def dns_query_one_server(domain:str, type:str, server:str):
         return cnameList, aList
     except Exception as e:
         # 如果请求失败则返回
-        print("{} query server {} failed!, info:{}".format(server ,domain, e))
+        print("{} query server {} failed!, info:{}".format(ip2name[server] ,domain, e))
         return [], []
 
 
