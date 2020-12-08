@@ -1,9 +1,6 @@
 absl-py==0.10.0
 alabaster==0.7.12
 alembic==1.4.2
-anaconda-client==1.7.2
-anaconda-navigator==1.9.7
-anaconda-project==0.8.2
 appdirs==1.4.4
 argo-models==2.2.1a0
 argon2-cffi==20.1.0
@@ -36,7 +33,6 @@ cffi==1.14.1
 chardet==3.0.4
 click==7.1.2
 cloudpickle==1.5.0
-clyent==1.2.2
 colorama==0.4.3
 conda==4.6.11
 conda-build==3.17.8
@@ -230,7 +226,6 @@ rfc3986==1.4.0
 rfc3986-validator==0.1.1
 rope==0.12.0
 rsa==4.6
-ruamel-yaml==0.15.46
 ruamel.yaml==0.16.10
 ruamel.yaml.clib==0.2.0
 sacrebleu==1.4.14
