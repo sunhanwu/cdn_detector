@@ -1,7 +1,10 @@
 import tornado.ioloop
+import sys
+sys.path.append("../")
 import tornado.web
-from dns_query.query import dns_query_all_servers
 from config import node_info
+from dns_query.query import dns_query_all_servers
+import os
 
 
 class QueryHandler(tornado.web.RequestHandler):
@@ -45,7 +48,7 @@ class Application(tornado.web.Application):
 
 def start_web_server():
     app = Application()
-    app.listen(node_info['node1']['deploy']['start_port'])
+    app.listen(node_info['node3']['deploy']['start_port'])
     tornado.ioloop.IOLoop.current().start()
 
 

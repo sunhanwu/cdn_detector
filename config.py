@@ -1,3 +1,4 @@
+import os
 db_config = {
     'host': 'www.sunhanwu.top',
     'port': 3306,
@@ -33,3 +34,6 @@ node_info = {
     }
 }
 
+
+
+dns_timeout = 2
