@@ -9,6 +9,7 @@ db_config = {
 
 with open('./dns_servers.txt', 'r') as f:
     serverNames = {x.strip().split(':')[0]: x.strip().split(':')[1] for x in f.readlines()}
+ip2name = {v:k for k, v in serverNames}
 
 node_info = {
     'node1':{
