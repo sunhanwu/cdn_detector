@@ -15,6 +15,7 @@ class QueryHandler(tornado.web.RequestHandler):
         :param kwargs: 参数
         :return: None
         """
+        print(self.request.uri)
         # 获取domain参数值
         domain = self.get_query_argument("domain")
         # 调用dns_query进行dns查询
@@ -40,7 +41,7 @@ class Application(tornado.web.Application):
 
 def start_web_server():
     app = Application()
-    app.listen(node_info['node1']['start_port'])
+    app.listen(node_info['node1']['deploy']['start_port'])
     tornado.ioloop.IOLoop.current().start()
 
 

@@ -11,9 +11,13 @@ with open('./dns_servers.txt', 'r') as f:
 
 node_info = {
     'node1':{
-        'ip': 'www.sunhanwu.top',
-        'visit_port': 6009,
-        'start_port': 8000
+        'proxy': {
+            'proxy_ip': 'www.sunhanwu.top',
+            'proxy_port': 6009,
+        },
+        'deploy': {
+            'start_port': 8000
+        }
     }
 }
 

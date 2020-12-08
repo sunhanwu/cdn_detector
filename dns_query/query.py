@@ -7,7 +7,7 @@ from config import serverNames
 import multiprocessing
 
 
-def dns_query_one_server(doname:str, type:str, server:str):
+def dns_query_one_server(domain:str, type:str, server:str):
     """
     dns查询函数
     :param doname: 待查询的域名
@@ -23,22 +23,26 @@ def dns_query_one_server(doname:str, type:str, server:str):
         # 设置递归服务器
         myResolver.nameservers = [server]
         # 进行dns请求
-        result = myResolver.resolve(doname, type)
+        result = myResolver.resolve(domain, type)
         # 遍历dns响应
         for index, record in enumerate(result.response.answer):
             recordSplited = record.to_text().split(' ')
             if recordSplited[3] == 'CNAME':
                 cnameList.append([recordSplited[0], recordSplited[4], index, server])
             elif recordSplited[3] == 'A':
-                aList.append([recordSplited[0], recordSplited[4], index, server])
+                if '\n' in recordSplited[4]:
+                    ip = recordSplited[4].split('\n')[0]
+                else:
+                    ip = recordSplited[4]
+                aList.append([recordSplited[0], ip, index, server])
         return cnameList, aList
-    except Exception:
+    except Exception as e:
         # 如果请求失败则返回
-        print("query {} failed!")
+        print("query {} failed!, info:{}".format(domain, e))
         return [], []
 
 
-def dns_query_all_servers(doname: str):
+def dns_query_all_servers(domain: str):
     """
     通过多个递归服务器查询某个域名, 使用多进程并发执行
     :param doname: 域名名称
@@ -49,7 +53,7 @@ def dns_query_all_servers(doname: str):
         totalAList = []
         server_ips = list(serverNames.values())
         pool = multiprocessing.Pool(processes=10)
-        argsPairs = [(doname, 'A', server_ip) for server_ip in server_ips]
+        argsPairs = [(domain, 'A', server_ip) for server_ip in server_ips]
         jobs = []
         for argsPair in argsPairs:
             job = pool.apply_async(dns_query_one_server, args=(argsPair[0], argsPair[1], argsPair[2], ))
@@ -62,7 +66,8 @@ def dns_query_all_servers(doname: str):
             totalAList += a
         return totalCnameList, totalAList
 
-    except Exception:
+    except Exception as e:
+        print("{}".format(e))
         return [], []
 
 if __name__ == '__main__':
