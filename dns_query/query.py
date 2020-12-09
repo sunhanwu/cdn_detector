@@ -26,7 +26,7 @@ def dns_query_one_server(domain:str, type:str, server:str):
         # 设置递归服务器
         myResolver.nameservers = [server]
         # 进行dns请求
-        result = myResolver.resolve(domain, type)
+        result = myResolver.query(domain, type)
         # 遍历dns响应
         for index, record in enumerate(result.response.answer):
             recordSplited = record.to_text().split(' ')
