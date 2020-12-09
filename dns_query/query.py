@@ -47,7 +47,7 @@ def dns_query_one_server(domain:str, type:str, server:str):
         return [], []
 
 
-def dns_query_all_servers(domain: str):
+def dns_query_all_servers(domain: str, nameserver=None):
     """
     通过多个递归服务器查询某个域名, 使用多进程并发执行
     :param doname: 域名名称
@@ -58,7 +58,7 @@ def dns_query_all_servers(domain: str):
         totalAList = []
         server_ips = list(serverNames.values())
         pool = multiprocessing.Pool(processes=10)
-        argsPairs = [(domain, 'A', server_ip) for server_ip in server_ips]
+        argsPairs = [(domain, 'A', nameserver) for server_ip in server_ips]
         jobs = []
         for argsPair in argsPairs:
             job = pool.apply_async(dns_query_one_server, args=(argsPair[0], argsPair[1], argsPair[2], ))
