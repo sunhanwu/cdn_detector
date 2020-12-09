@@ -26,7 +26,7 @@ node_info = {
     },
     'node3':{
         'proxy': {
-            'proxy_ip': 'www.sunhanwu.top',
+            'proxy_ip': 'node3.sunhanwu.top',
             'proxy_port': 6009,
         },
         'deploy': {
@@ -43,4 +43,4 @@ node_info = {
 
 
 
-dns_timeout = 2
+dns_timeout = 1
