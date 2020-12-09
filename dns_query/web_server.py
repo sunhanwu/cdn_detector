@@ -29,7 +29,7 @@ class QueryHandler(tornado.web.RequestHandler):
             self.write({'cname': cname, 'a': a})
         except Exception as e:
             logger.error("QueryHandler timeout, query:{}, e:{}".format(self.request.uri, e))
-            super().write_error(status_code=408, **kwargs)
+            super().write({'cname':[], 'a':[]})
 
 
 class Application(tornado.web.Application):
