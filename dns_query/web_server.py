@@ -3,7 +3,7 @@ import sys
 sys.path.append("../")
 import tornado.web
 from utils.config import node_info
-from dns_query.query import dns_query_one_server
+from dns_query.query import dns_query_all_servers
 from utils.utils import logger_dnsquery as logger
 
 
@@ -23,8 +23,11 @@ class QueryHandler(tornado.web.RequestHandler):
             # 获取domain参数值
             domain = self.get_query_argument("domain")
             nameserver = self.get_query_argument("nameserver")
+            nameserver = eval(nameserver)
+            if not isinstance(nameserver, list):
+                raise TypeError
             # 调用dns_query进行dns查询
-            cname, a = dns_query_one_server(domain, 'A', nameserver)
+            cname, a = dns_query_all_servers(domain, 'A', nameserver)
             # 向resopnse写入字典信息，{'cname':cname, 'a':a}
             self.write({'cname': cname, 'a': a})
         except Exception as e:
