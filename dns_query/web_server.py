@@ -48,7 +48,7 @@ class Application(tornado.web.Application):
 
 def start_web_server():
     app = Application()
-    app.listen(node_info['node3']['deploy']['start_port'])
+    app.listen(node_info['node2']['deploy']['port'])
     tornado.ioloop.IOLoop.current().start()
 
 
