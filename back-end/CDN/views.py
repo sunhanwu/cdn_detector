@@ -1,21 +1,22 @@
-from django.shortcuts import render
 # from  CDN.models import CDN_urls
-from django.http import HttpResponse
 from django.http import JsonResponse
 # 增加对分页的支持
-from django.core.paginator import Paginator, EmptyPage
 import sys
 sys.path.append("../..")
-import utils
-import config
 import json
+from database.database_sql import operation
+from database.database import session
+from sqlalchemy.ext.declarative import declarative_base
+from utils.config import node_info
+sys.path.append("..")
+import Server_communication
+
 def listorders(request):
     # 将请求参数统一放入request 的 params 属性中，方便后续处理
 
     # GET请求 参数在url中，同过request 对象的 GET属性获取
     if request.method == 'GET':
         request = request.GET
-
     # POST/PUT/DELETE 请求 参数 从 request 对象的 body 属性中获取
     elif request.method in ['POST', 'PUT', 'DELETE']:
         # 根据接口，POST/PUT/DELETE 请求的消息体都是 json格式
@@ -30,13 +31,15 @@ def listorders(request):
 
 
 def listcustomers(request,domain):
-    # 返回一个 QuerySet 对象 ，包含所有的表记录
-    qs = Customer.objects.values()
-
-    # 将 QuerySet 对象 转化为 list 类型
-    # 否则不能 被 转化为 JSON 字符串
-    retlist = list(qs)
-
-    return JsonResponse({'ret': 0, 'retlist': retlist})
+    # 数据库连接初始化
+    op = operation(session)
+    if op.is_exist(domain):
+        pass
+    else:
+        result = multi_request_domain(domain)
+        op.op_add(result)
+    #查找该域名以及底下的CDN
+    lists=op.op_select(domain)
+    return JsonResponse({'ret': 0, 'retlist': lists})
 
 
