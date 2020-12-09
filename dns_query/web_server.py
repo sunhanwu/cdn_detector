@@ -4,7 +4,9 @@ sys.path.append("../")
 import tornado.web
 from config import node_info
 from dns_query.query import dns_query_all_servers
+from utils import request_domain
 import os
+import multiprocessing
 
 
 class QueryHandler(tornado.web.RequestHandler):
