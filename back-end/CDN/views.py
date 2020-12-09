@@ -1,13 +1,10 @@
-from django.shortcuts import render
 # from  CDN.models import CDN_urls
 from django.http import HttpResponse
-from django.http import JsonResponse
 # 增加对分页的支持
-from django.core.paginator import Paginator, EmptyPage
 import sys
 sys.path.append("../..")
-import utils
-import config
+
+
 def listorders(request):
     # 返回一个 QuerySet 对象 ，包含所有的表记录
     # qs = Customer.objects.values()

@@ -1,7 +1,60 @@
-import sys
-sys.path.append('../')
-from database.database import DBSession
-from database.database import CNAME, A, engine, create_engine, Base, sessionmaker
+"""
+Author: sunhanwu
+Date: 2020-12-07
+"""
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, DateTime, Enum
+from sqlalchemy.orm import sessionmaker
+# from config import db_config      # TODO
+import datetime
+
+
+Base = declarative_base()
+
+
+class CNAME(Base):
+    """
+    对应CNAME表结构
+    """
+    __tablename__ = 'CNAME'
+    # id，主键，自增
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    # dns 域名1，限制长度在65个字符之内
+    dns1 = Column(String(65))
+    # dns 域名2, 限制长度在65个字符内
+    dns2 = Column(String(65))
+    # 查询的递归服务器位置
+    # area = Column(Enum("GD", "BJ"), default='BJ')   # 修改为字符串，记录查询的递归服务器IP
+    area = Column(String(15))   # TODO 修改为字符串，记录查询的递归服务器IP
+    # 插入数据的时间
+    date = Column(DateTime, default=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    # 插入标志
+    flag = Column(Enum("0", "1", "2"), default="0")
+
+
+class A(Base):
+    """
+    对应A表结构
+    """
+    __tablename__ = 'A'
+    # id，主键，自增
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    # dns 域名，限制长度在65个字符之内
+    dns = Column(String(65))
+    # 具体的ip
+    ip = Column(String(20))
+    # 查询的递归服务器位置
+    # area = Column(Enum("BJ"), default="BJ")     # 同上，改为IP地址
+    area = Column(String(15))     # 同上，改为IP地址
+    # ip前24位的值
+    # ip_24 = Column(String(20))
+    # dns 递归链深度
+    depth = Column(Integer)
+    # 插入数据的时间
+    date = Column(DateTime, default=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    # 插入标志
+    flag = Column(Enum("0", "1", "2"), default="0")
 
 
 class operation():
@@ -17,8 +70,8 @@ class operation():
         :return: null
         '''
 
-        new_cname_list = new_data_dic.get('cname', [])    # 传入数据的‘cname’键值
-        new_a_list = new_data_dic.get('a', [])      # 传入数据的‘a’键值
+        new_cname_list = new_data_dic.get('cname')    # 传入数据的‘cname’键值
+        new_a_list = new_data_dic.get('a')      # 传入数据的‘a’键值
         all_record = []
 
         cname_record_list = []
@@ -99,6 +152,7 @@ class operation():
 
     def op_chg(self):
         pass
+
 
 if __name__ == '__main__':
     engine = create_engine('mysql+pymysql://cdn_user:cdn_123456@www.sunhanwu.top:3306/cdn?charset=utf8')
@@ -186,6 +240,4 @@ if __name__ == '__main__':
 
     sss = op.is_exist('www.tent.com.')
     print(sss)
-
-
 

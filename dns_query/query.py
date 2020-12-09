@@ -2,10 +2,12 @@
 Author: sunhanwu
 Date: 2020-12-07
 """
+import sys
+sys.path.append('../')
 import dns.resolver
-from config import serverNames, dns_timeout, ip2name
+from utils.config import serverNames, dns_timeout, ip2name
 import multiprocessing
-
+from utils.utils import logger_dnsquery as logger
 
 def dns_query_one_server(domain:str, type:str, server:str):
     """
@@ -41,7 +43,7 @@ def dns_query_one_server(domain:str, type:str, server:str):
         return cnameList, aList
     except Exception as e:
         # 如果请求失败则返回
-        print("{} query server {} failed!, info:{}".format(ip2name[server] ,domain, e))
+        logger.error("{} query server {} failed!, {}".format(ip2name[server], domain, e))
         return [], []
 
 
@@ -70,7 +72,7 @@ def dns_query_all_servers(domain: str):
         return totalCnameList, totalAList
 
     except Exception as e:
-        print("{}".format(e))
+        logger.error("{}".format(e))
         return [], []
 
 if __name__ == '__main__':
