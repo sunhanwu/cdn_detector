@@ -14,7 +14,8 @@ def multi_request_domain(domain):
         totalAList = []
         host_list = [['node1', '6009'],
                      ['node2', "6010"],
-                     ['www', "6009"]]
+                     ['www', "6009"],
+                     ["node4","6009"]]
         url_list = ['http://{host}.sunhanwu.top:{port}/query'.format(host=i[0], port=i[1]) for i in host_list]
         pool = multiprocessing.Pool(processes=3)
         jobs = []
@@ -37,9 +38,10 @@ def multi_request_domain(domain):
 
 if __name__ == '__main__':
     time1=time.time()
-    results=multi_request_domain("www.baidu.com")
+    results=multi_request_domain("www.baidu.com.")
     print(len(results["a"]))
-    print(results)
     print(time.time()-time1)
+    print(results)
+
 
 
