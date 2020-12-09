@@ -32,7 +32,7 @@ def multi_request_domain(domain):
         randomNameServer4 = getRandomNameServer()
         url_list = ['http://{host}.sunhanwu.top:{port}/query'.format(host=i[0], port=i[1]) for i in host_list]
         url_nameserver_list = zip(url_list, [randomNameServer1, randomNameServer2, randomNameServer3, randomNameServer4])
-        pool = multiprocessing.Pool(processes=3)
+        pool = multiprocessing.Pool(processes=4)
         jobs = []
         for url, nameserver in url_nameserver_list:
             job = pool.apply_async(request_domain, args=(url, domain, nameserver))
