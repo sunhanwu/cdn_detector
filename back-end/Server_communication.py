@@ -46,7 +46,7 @@ def multi_request_domain(domain):
                 totalAList += host_result["a"]
         return {"cname": totalCnameList, "a": totalAList}
     except Exception as e:
-        logger.error("{}".format(e))
+        logger.error("multi_request_domain error: {}".format(e))
         return {'cname':[], 'a':[]}
     finally:
         logger.info("{},完成时间time:{time}".format(domain, time=time.time() - start_time))
