@@ -31,7 +31,7 @@ class QueryHandler(tornado.web.RequestHandler):
             if not isinstance(nameserver, list):
                 raise TypeError
             # 调用dns_query进行dns查询
-            cname, a = dns_query_all_servers(domain, 'A', nameserver)
+            cname, a = dns_query_all_servers(domain, nameserver)
             # 向resopnse写入字典信息，{'cname':cname, 'a':a}
             self.write({'cname': cname, 'a': a})
         except Exception as e:
