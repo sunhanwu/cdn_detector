@@ -30,7 +30,7 @@ def load_alexa_domains(paths):
     except:
         return []
 
-def request_domain(url, domain, nameserver=None, proxy=False):
+def request_domain(url, domain, nameserver:list=None, proxy=False):
     """
     构造query请求
     :param url: 子节点的url
@@ -38,7 +38,7 @@ def request_domain(url, domain, nameserver=None, proxy=False):
     :return: 查询结果，字典结构 {'cname': cname, 'a':a}
     """
     try:
-        response = requests.get(url + '?domain={}&nameserver={}'.format(domain, nameserver))
+        response = requests.get(url + '?domain={}&nameserver1={}&nameserver2={}&nameserver3={}&nameserver4={}&nameserver5={}'.format(domain, nameserver[0],nameserver[1],nameserver[2],nameserver[3],nameserver[4]))
         if response.status_code != 200:
             return {}
         result = response.text
