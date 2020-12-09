@@ -8,7 +8,7 @@
             </div>
         </div> -->
             
-        <el-input v-model="input" placeholder="请输入域名" style="display:inline-table; width: 10%; float:left" @keyup.enter.native="searchnews()" clearable></el-input>
+        <el-input v-model="input" placeholder="请输入CDN域名" style="display:inline-table; width: 10%; float:left" @input.native="btn()" ></el-input>
           <table
             id="CDN"
             data-height="800"
@@ -133,7 +133,24 @@ export default {
             data: this.data
             })
         console.log(this.data)
-    }
+    },
+    btn:function(){
+      console.log(this.input)        
+      var search = this.input;
+      if (search) {
+        this.searchData = this.data.filter(function(product) {
+          // console.log('1',product)
+          return Object.keys(product).some(function(key) {
+            // console.log('2',key)
+            return String(product['cdndomain']).toLowerCase().indexOf(search) > -1
+          })
+        })
+        $('#CDN').bootstrapTable("load", this.searchData)  
+      }
+      else{
+        $('#CDN').bootstrapTable("load", this.data)  
+      }          
+      }
   }
 }
 </script>
