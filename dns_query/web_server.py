@@ -22,9 +22,11 @@ class QueryHandler(tornado.web.RequestHandler):
             logger.info("QueryHandler, {}".format(self.request.uri))
             # 获取domain参数值
             domain = self.get_query_argument("domain")
-            nameserver = self.get_query_argument("nameserver")
+            nameserver1 = self.get_query_argument("nameserver1")
+            nameserver2 = self.get_query_argument("nameserver2")
+            nameserver3 = self.get_query_argument("nameserver3")
             # 调用dns_query进行dns查询
-            cname, a = dns_query_all_servers(domain, nameserver)
+            cname, a = dns_query_all_servers(domain, [nameserver1, nameserver2, nameserver3])
             # 向resopnse写入字典信息，{'cname':cname, 'a':a}
             self.write({'cname': cname, 'a': a})
         except Exception as e:
