@@ -22,8 +22,9 @@ class QueryHandler(tornado.web.RequestHandler):
             logger.info("QueryHandler, {}".format(self.request.uri))
             # 获取domain参数值
             domain = self.get_query_argument("domain")
+            nameserver = self.get_query_argument("nameserver")
             # 调用dns_query进行dns查询
-            cname, a = dns_query_all_servers(domain)
+            cname, a = dns_query_all_servers(domain, nameserver)
             # 向resopnse写入字典信息，{'cname':cname, 'a':a}
             self.write({'cname': cname, 'a': a})
         except Exception as e:
@@ -48,7 +49,7 @@ class Application(tornado.web.Application):
 
 def start_web_server():
     app = Application()
-    app.listen(node_info['node3']['deploy']['port'])
+    app.listen(node_info['node3']['deploy']['start_port'])
     tornado.ioloop.IOLoop.current().start()
 
 
