@@ -2,11 +2,9 @@ import tornado.ioloop
 import sys
 sys.path.append("../")
 import tornado.web
-from config import node_info
+from utils.config import node_info
 from dns_query.query import dns_query_all_servers
-from utils import request_domain, logger
-import os
-import multiprocessing
+from utils.utils import logger
 
 
 class QueryHandler(tornado.web.RequestHandler):

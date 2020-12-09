@@ -1,4 +1,5 @@
-import os
+import sys
+sys.path.append('/home/sunhanwu/cdn_detector')
 db_config = {
     'host': 'www.sunhanwu.top',
     'port': 3306,
@@ -7,7 +8,7 @@ db_config = {
     'database': 'cdn'
 }
 
-with open('./dns_servers.txt', 'r') as f:
+with open('../dns_query/dns_servers.txt', 'r') as f:
     serverNames = {x.strip().split(':')[0]: x.strip().split(':')[1] for x in f.readlines()}
 ip2name = {v:k for k, v in serverNames.items()}
 

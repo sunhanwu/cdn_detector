@@ -1,11 +1,9 @@
-from django.db import models
-
 # Create your models here.
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, Enum
 from sqlalchemy.orm import sessionmaker
-from config import db_config
+from utils.config import db_config
 import datetime
 
 Base = declarative_base()

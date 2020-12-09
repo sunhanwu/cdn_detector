@@ -5,9 +5,10 @@ date: 2020-12-08
 import pandas as pd
 import requests
 import logging
-from config import log_path
+import logging.handlers
+from utils.config import log_path
 import os
-import datetime
+
 
 def load_alexa_domains(paths):
     """
