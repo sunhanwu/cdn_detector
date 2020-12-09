@@ -7,7 +7,7 @@ sys.path.append('../')
 import dns.resolver
 from utils.config import serverNames, dns_timeout, ip2name
 import multiprocessing
-from utils.utils import logger
+from utils.utils import logger_dnsquery as logger
 
 def dns_query_one_server(domain:str, type:str, server:str):
     """

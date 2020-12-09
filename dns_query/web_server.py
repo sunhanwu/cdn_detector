@@ -4,7 +4,7 @@ sys.path.append("../")
 import tornado.web
 from utils.config import node_info
 from dns_query.query import dns_query_all_servers
-from utils.utils import logger
+from utils.utils import logger_dnsquery as logger
 
 
 class QueryHandler(tornado.web.RequestHandler):
