@@ -38,7 +38,7 @@ def request_domain(url, domain, nameserver=None, proxy=False):
     :return: 查询结果，字典结构 {'cname': cname, 'a':a}
     """
     try:
-        response = requests.get(url + '?domain={}&nameserver={}'.format(domain,nameserver))
+        response = requests.get(url + '?domain={}&nameserver={}'.format(domain, nameserver))
         if response.status_code != 200:
             return {}
         result = response.text
