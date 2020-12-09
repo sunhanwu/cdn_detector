@@ -36,7 +36,15 @@ def request_domain(url, domain):
     :return: 查询结果，字典结构 {'cname': cname, 'a':a}
     """
     try:
-        response = requests.get(url + '?domain={}'.format(domain))
+        response_proxy = requests.get("http://www.sunhanwu.top:5555/random")
+        if response_proxy.status_code == 200:
+            proxy = response_proxy.text
+        else:
+            proxy = None
+        if proxy:
+            response = requests.get(url + '?domain={}'.format(domain), proxies={"http":proxy})
+        else:
+            response = requests.get(url + '?domain={}'.format(domain))
         if response.status_code != 200:
             return {}
         result = response.text
