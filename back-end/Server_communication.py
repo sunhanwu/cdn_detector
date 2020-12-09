@@ -26,12 +26,14 @@ def multi_request_domain(domain):
             ['node3', node_info['node3']['proxy']['proxy_port']],
             ['node4', node_info['node4']['deploy']['port']]
         ]
-        randomIPS = getRandomNameServer()
+        randomNameServer1 = getRandomNameServer()
+        randomNameServer2 = getRandomNameServer()
+        randomNameServer3 = getRandomNameServer()
         url_list = ['http://{host}.sunhanwu.top:{port}/query'.format(host=i[0], port=i[1]) for i in host_list]
         pool = multiprocessing.Pool(processes=3)
         jobs = []
         for url in url_list:
-            job = pool.apply_async(request_domain, args=(url, domain, randomIPS))
+            job = pool.apply_async(request_domain, args=(url, domain, [randomNameServer1, randomNameServer2, randomNameServer3]))
             jobs.append(job)
         pool.close()
         pool.join()
