@@ -4,7 +4,7 @@ sys.path.append("../")
 import tornado.web
 from config import node_info
 from dns_query.query import dns_query_all_servers
-from utils import request_domain
+from utils import request_domain, logger
 import os
 import multiprocessing
 
@@ -21,7 +21,7 @@ class QueryHandler(tornado.web.RequestHandler):
         :return: None
         """
         try:
-            print(self.request.uri)
+            logger.info("QueryHandler, {}".format(self.request.uri))
             # 获取domain参数值
             domain = self.get_query_argument("domain")
             # 调用dns_query进行dns查询
@@ -29,6 +29,7 @@ class QueryHandler(tornado.web.RequestHandler):
             # 向resopnse写入字典信息，{'cname':cname, 'a':a}
             self.write({'cname': cname, 'a': a})
         except Exception as e:
+            logger.error("QueryHandler timeout, query:{}, e:{}".format(self.request.uri, e))
             super().write_error(status_code=408, **kwargs)
 
 
@@ -49,7 +50,7 @@ class Application(tornado.web.Application):
 
 def start_web_server():
     app = Application()
-    app.listen(node_info['node2']['deploy']['port'])
+    app.listen(node_info['node3']['deploy']['start_port'])
     tornado.ioloop.IOLoop.current().start()
 
 

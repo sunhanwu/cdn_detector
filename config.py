@@ -41,6 +41,8 @@ node_info = {
     }
 }
 
+log_path = '../log/'
+
 
 
 dns_timeout = 1

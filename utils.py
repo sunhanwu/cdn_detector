@@ -4,6 +4,11 @@ date: 2020-12-08
 """
 import pandas as pd
 import requests
+import logging
+from config import log_path
+import os
+import datetime
+
 def load_alexa_domains(paths):
     """
     加载alexa 域名数据
@@ -39,6 +44,23 @@ def request_domain(url, domain):
     except Exception as e:
         print("request {} fail, info:".format(url, e))
         return {}
+
+def log():
+    logger = logging.getLogger("cdn_detector")
+    handler = logging.StreamHandler()
+    handler.setLevel(logging.INFO)
+    file_handler = logging.handlers.RotatingFileHandler(os.path.join(log_path, 'log.txt'), \
+                                                        maxBytes = 5 * 1024 * 1024,backupCount=10, encoding='utf-8')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    logger.addHandler(file_handler)
+    logger.setLevel(logging.INFO)
+    return logger
+
+logger = log()
+
 
 
 if __name__ == '__main__':
