@@ -1,7 +1,7 @@
 import sys
 sys.path.append("../")
 from utils.utils import request_domain
-from utils.utils import logger
+from utils.utils import logger_commucination as logger
 import multiprocessing
 import time
 import pandas as pd

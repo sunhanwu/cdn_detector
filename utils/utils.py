@@ -46,11 +46,11 @@ def request_domain(url, domain):
         print("request {} fail, info:{}".format(url, e))
         return {}
 
-def log():
-    logger = logging.getLogger("cdn_detector")
+def log(name):
+    logger = logging.getLogger("cdn_detector-{}".format(name))
     handler = logging.StreamHandler()
     handler.setLevel(logging.INFO)
-    file_handler = logging.handlers.RotatingFileHandler(os.path.join(log_path, 'log.txt'), \
+    file_handler = logging.handlers.RotatingFileHandler(os.path.join(log_path, '{}-log.txt'.format(name)), \
                                                         maxBytes = 5 * 1024 * 1024,backupCount=10, encoding='utf-8')
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
@@ -60,7 +60,9 @@ def log():
     logger.setLevel(logging.INFO)
     return logger
 
-logger = log()
+logger_commucination = log('commucination')
+logger_dnsquery = log('dns-query')
+logger_database = log('database')
 
 
 
