@@ -1,6 +1,7 @@
 import sys
 sys.path.append("..")
 from utils import request_domain
+from utils import logger
 import config
 import requests
 import multiprocessing
@@ -45,13 +46,7 @@ def multi_request_domain(domain):
         print("{}".format(e))
 
 
-pool = multiprocessing.Pool(processes=3)
-jobs = []
-for url in url_list:
-    job = pool.apply_async(request_domain, args=(url,domain))
-    jobs.append(job)
-pool.close()
-pool.join()
+
 
 if __name__ == '__main__':
     data_path="../data/top-1m-12-08.csv"
@@ -65,28 +60,34 @@ if __name__ == '__main__':
     session = DBSession()
     op = operation(session)
 
+
     for index in tqdm(range(0,len(domain_list)-10,10)):
         domain_group=domain_list.iloc[index:index+10,1]
+        pool = multiprocessing.Pool(processes=10)
+        jobs = []
         time1=time.time()
-        try:
-            #判断是否已经存在
-            if op.is_exist(domain):
-                print("{domain}is existing".format(domain=domain))
-            else:
-                print("开始爬取{domain}".format(domain=domain))
-                results=multi_request_domain(domain)
+        for domain in domain_group:
+            try:
+                #判断是否已经存在
+                if op.is_exist(domain):
+                    logger.info("{domain}is existing".format(domain=domain))
+                    pass
+                else:
+                    logger.info("开始爬取{domain}".format(domain=domain))
+                    job = pool.apply_async(multi_request_domain, args=(domain))
+                    jobs.append(job)
+                    logger.info("{domain}爬取成功".format(domain=domain))
+            except Exception as e:
+                logger.warning("插入错误")
+        pool.close()
+        pool.join()
 
-                print(results)
-                time2=time.time()
-                log("index:{index},爬取time:{time}".format(index=index, time=time2-time1))
-                op.op_add(results)
-                print("插入成功")
-                print("index:{index},插入time:{time}".format(index=index, time=time.time()-time2))
-                print(len(results["a"]))
+        for host_job in jobs:
+            domain_result = host_job.get()
+            op.op_add(domain_result)
 
-            #插入数据
-        except Exception as e:
-            print("插入错误")
+        logger.info("index:{index},时间time:{time}".format(index=index, time=time.time()-time1))
+
 
 
 
