@@ -79,8 +79,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        "USER":"cdn",
-        'NAME': "mydb",
+        "USER":"cdn_user",
+        'NAME': "cdn",
         "HOST":"www.sunhanwu.top",
         'PORT':'3306',
         'PASSWORD':'cdn_123456',

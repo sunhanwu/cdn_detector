@@ -1,7 +1,7 @@
 import sys
-sys.path.append("../")
+sys.path.append("../../")
 from utils.utils import request_domain
-from utils.utils import logger_commucination as logger
+# from utils.utils import logger_commucination as logger
 import multiprocessing
 import time
 import pandas as pd
@@ -72,7 +72,7 @@ def multi_request_domain_pool(domains:list, jobs=1):
 
 
 if __name__ == '__main__':
-    data_path = "../data/top-1m-12-08.csv"
+    data_path = "../../data/top-1m-12-08.csv"
     domain_list = pd.read_csv(data_path, header=None, encoding="utf-8")
     # 数据库连接初始化
     op = operation(session)

@@ -107,20 +107,22 @@ export default {
         //     },
         // });
         this.getlist();
+
   },
     methods: {
     export1(data){
       window.open(data,'_blank'); 
     },
     searchnews(){
-    //   this.search=this.$route.query.search  
-    //   this.$http.get('http://127.0.0.1:8000/api/add?search=' + this.search)
-    //     .then((response) => {
-    //       console.log('7',response)
-    //       var res = JSON.parse(response.bodyText)
-    //       this.bookList=res.msg
-    //       console.log('1',this.bookList)
-    //     })
+      this.search=this.$route.query.search
+      console.log(this.search)  
+      // this.$http.get('http://127.0.0.1:8000/api/add?search=' + this.search)
+      //   .then((response) => {
+      //     console.log('7',response)
+      //     var res = JSON.parse(response.bodyText)
+      //     this.bookList=res.msg
+      //     console.log('1',this.bookList)
+      //   })
         this.data = [{rawdomain:'1',cdndomain:'www.baidu.com',region:'China',ipaddress:'192.123.123.1'}]
         // $("#CDN").bootstrapTable('resetSearch', this.search);  
         $('#CDN').bootstrapTable("load", this.data)
@@ -129,10 +131,20 @@ export default {
         this.data = [{rawdomain:'1',cdndomain:'www.baidu.com',region:'China',ipaddress:'192.123.123.1'},{rawdomain:'2',cdndomain:'www.google.com',region:'America',ipaddress:'192.123.23.2'}]
         // $("#CDN").bootstrapTable('resetSearch', this.search);  
         // $('#CDN').bootstrapTable("load", this.data)
+        this.search=this.$route.query.search
+        this.$http.get('http://127.0.0.1:8000/query/?domain=' + this.search)
+        .then((response) => {
+          console.log('7',response)
+          var res = JSON.parse(response.bodyText)
+          this.bookList=res.msg
+          console.log('1',this.bookList)        })
+
+
+        console.log(this.search) 
         $('#CDN').bootstrapTable({
             data: this.data
             })
-        console.log(this.data)
+        // console.log(this.data)
     },
     btn:function(){
       console.log(this.input)        

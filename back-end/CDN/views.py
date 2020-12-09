@@ -6,10 +6,9 @@ sys.path.append("../..")
 import json
 from database.database_sql import operation
 from database.database import session
-from sqlalchemy.ext.declarative import declarative_base
-from utils.config import node_info
+#from sqlalchemy.ext.declarative import declarative_base
 sys.path.append("..")
-import Server_communication
+from . import Server_communication
 
 def listorders(request):
     # 将请求参数统一放入request 的 params 属性中，方便后续处理
@@ -27,7 +26,7 @@ def listorders(request):
     if action:
         return listcustomers(request,action)
     else:
-        return JsonResponse({'ret': 1, 'msg': '不支持该类型http请求'})
+        return JsonResponse({'ret': 0, 'msg': '不支持该类型http请求'})
 
 
 def listcustomers(request,domain):
@@ -36,7 +35,7 @@ def listcustomers(request,domain):
     if op.is_exist(domain):
         pass
     else:
-        result = multi_request_domain(domain)
+        result = Server_communication.multi_request_domain(domain)
         op.op_add(result)
     #查找该域名以及底下的CDN
     lists=op.op_select(domain)
