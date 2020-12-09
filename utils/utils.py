@@ -43,7 +43,7 @@ def request_domain(url, domain):
         result = eval(result)
         return result
     except Exception as e:
-        print("request {} fail, info:".format(url, e))
+        print("request {} fail, info:{}".format(url, e))
         return {}
 
 def log():
