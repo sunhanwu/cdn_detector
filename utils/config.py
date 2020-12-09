@@ -31,7 +31,7 @@ node_info = {
             'proxy_port': 6009,
         },
         'deploy': {
-            'start_port': 8000
+            'port': 8000
         }
     },
     'node4':{
