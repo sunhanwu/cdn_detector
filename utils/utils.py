@@ -8,6 +8,8 @@ import logging
 import logging.handlers
 from utils.config import log_path
 import os
+from utils.config import serverNames
+import random
 
 
 def load_alexa_domains(paths):
@@ -28,7 +30,7 @@ def load_alexa_domains(paths):
     except:
         return []
 
-def request_domain(url, domain):
+def request_domain(url, domain, nameserver:list=None, proxy=False):
     """
     构造query请求
     :param url: 子节点的url
@@ -36,7 +38,7 @@ def request_domain(url, domain):
     :return: 查询结果，字典结构 {'cname': cname, 'a':a}
     """
     try:
-        response = requests.get(url + '?domain={}'.format(domain))
+        response = requests.get(url + '?domain={}&nameserver1={}&nameserver2={}&nameserver3={}&nameserver4={}&nameserver5={}'.format(domain, nameserver[0],nameserver[1],nameserver[2],nameserver[3],nameserver[4]))
         if response.status_code != 200:
             return {}
         result = response.text
@@ -45,6 +47,16 @@ def request_domain(url, domain):
     except Exception as e:
         print("request {} fail, info:{}".format(url, e))
         return {}
+
+def getRandomNameServer():
+    """
+    随机返回一个
+    :return:
+    """
+    nameServerIPS = list(serverNames.values())
+    random_indexs = random.sample(range(0, 16), 5)
+    return [nameServerIPS[x] for x in random_indexs]
+
 
 def log(name):
     logger = logging.getLogger("cdn_detector-{}".format(name))
@@ -60,9 +72,9 @@ def log(name):
     logger.setLevel(logging.INFO)
     return logger
 
-# logger_commucination = log('commucination')
-# logger_dnsquery = log('dns-query')
-# logger_database = log('database')
+logger_commucination = log('commucination')
+logger_dnsquery = log('dns-query')
+logger_database = log('database')
 
 
 

@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')
-from database.database import DBSession
-from database.database import CNAME, A, engine, create_engine, Base, sessionmaker
+from database.database import session, A, CNAME
+from utils.utils import logger_database as logger
 
 
 class operation():
@@ -16,7 +16,6 @@ class operation():
         :param new_data_dic: 要添加的数据
         :return: null
         '''
-
         new_cname_list = new_data_dic.get('cname', [])    # 传入数据的‘cname’键值
         new_a_list = new_data_dic.get('a', [])      # 传入数据的‘a’键值
         all_record = []
@@ -37,8 +36,14 @@ class operation():
         all_record.extend(cname_record_list)
         all_record.extend(a_record_list)
 
-        self.session.add_all(all_record)
-        self.session.commit()
+        for item in all_record:
+            try:
+                self.session.add(item)
+                self.session.commit()
+                logger.info(item)
+            except Exception as e:
+                self.session.rollback()
+                # logger.error("op_add error: {}".format(e))
 
     # 判断是否存在
     def is_exist(self, dns):
@@ -101,41 +106,6 @@ class operation():
         pass
 
 if __name__ == '__main__':
-    engine = create_engine('mysql+pymysql://cdn_user:cdn_123456@www.sunhanwu.top:3306/cdn?charset=utf8')
-    Base.metadata.create_all(engine)
-    DBSession = sessionmaker(bind=engine)
-    session = DBSession()
-
-    op = operation(session)
-
-    data_dic = {'cname': [
-        ['www.baidu.com', 'a.shifen.com', 0, '8.8.8.8'],
-        ['www.sina.com', 'w.sina.com', 0, '114.114.8.8'],
-        ['www.tent.com', 'tt.asdf.com', 0, '110.0.110.8'],
-        ['www.ali.com', 'ali.ali.com', 0, '123.123.123.8']
-    ],
-                'a': [
-                    ['a.shifen.com', '192.168.2.3', '8.8.8.8', '192.168.2.3', 2],
-                    ['w.sina.com', '192.168.6.16', '114.114.8.8', '192.168.2.3', 2],
-                    ['tt.asdf.com', '192.127.8.3', '110.0.110.8', '192.168.2.3', 2],
-                    ['ali.ali.com', '192.26.2.3', '123.123.123.8', '192.168.2.3', 2]
-                ]}
-
-    # op.op_add(data_dic)
-
-    data_dic_1 = {
-        'cname': [['www.baidu.com', 'b.shifen.com', 0, '8.8.9.9'],
-                  ['a.shifen.com', 'c.shifen.com', 0, '10.10.10.10']]
-    }
-
-    # op.op_add(data_dic_1)
-
-    data_dic_2 = {
-        'a': [['b.shifen.com', '192.156.15.3', '8.8.8.8', '192.168.2.3', 2],
-              ['c.shifen.com', '192.211.123.3', '8.8.8.8', '192.168.2.3', 2]]
-    }
-
-
     data = {
         'cname': [['www.baidu.com.', 'www.a.shifen.com.', 0, '37.235.1.174'],
                   ['www.a.shifen.com.', 'www.wshifen.com.', 1, '37.235.1.174'],
@@ -172,20 +142,8 @@ if __name__ == '__main__':
               ['www.wshifen.com.', '119.63.197.151', 2, '45.248.197.53']]
     }
 
-    # op.op_add(data)
-
-    # 查询所有
-    # lists = op.op_select('www.baidu.com.')
-    #
-    # print('-')
-    # for listss in lists:
-    #     print(listss)
-
-    ss = op.is_exist('www.baidu.com.')
-    print(ss)
-
-    sss = op.is_exist('www.tent.com.')
-    print(sss)
+    op = operation(session)
+    op.op_add(data)
 
 
 

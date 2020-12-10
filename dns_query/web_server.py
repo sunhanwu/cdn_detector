@@ -22,13 +22,21 @@ class QueryHandler(tornado.web.RequestHandler):
             logger.info("QueryHandler, {}".format(self.request.uri))
             # 获取domain参数值
             domain = self.get_query_argument("domain")
+            nameserver1 = self.get_query_argument("nameserver1")
+            nameserver2 = self.get_query_argument("nameserver2")
+            nameserver3 = self.get_query_argument("nameserver3")
+            nameserver4 = self.get_query_argument("nameserver4")
+            nameserver5 = self.get_query_argument("nameserver5")
+            nameserver = [nameserver1, nameserver2, nameserver3, nameserver4, nameserver5]
+            if not isinstance(nameserver, list):
+                raise TypeError
             # 调用dns_query进行dns查询
-            cname, a = dns_query_all_servers(domain)
+            cname, a = dns_query_all_servers(domain, nameserver)
             # 向resopnse写入字典信息，{'cname':cname, 'a':a}
             self.write({'cname': cname, 'a': a})
         except Exception as e:
             logger.error("QueryHandler timeout, query:{}, e:{}".format(self.request.uri, e))
-            super().write_error(status_code=408, **kwargs)
+            super().write({'cname':[], 'a':[]})
 
 
 class Application(tornado.web.Application):
@@ -48,7 +56,7 @@ class Application(tornado.web.Application):
 
 def start_web_server():
     app = Application()
-    app.listen(node_info['node3']['deploy']['start_port'])
+    app.listen(node_info['node2']['deploy']['port'])
     tornado.ioloop.IOLoop.current().start()
 
 
