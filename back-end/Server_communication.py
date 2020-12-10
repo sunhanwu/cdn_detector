@@ -10,6 +10,7 @@ from database.database import session
 from sqlalchemy.ext.declarative import declarative_base
 from utils.config import node_info      # TODO
 from utils.utils import getRandomNameServer
+from dns_query.clawer_doamins import claw_subdomains
 import ipdb
 
 Base = declarative_base()
@@ -85,10 +86,9 @@ if __name__ == '__main__':
     op = operation(session)
     for index in range(0, len(domain_list)):
         domain = domain_list.iloc[index, 1]
-        # for domain in domain_group:
-        #     if op.is_exist(domain):
-        #         domain_group.remove(domain)
-        # domain_group_result = multi_request_domain_pool(domain_group)
-        result = multi_request_domain(domain)
-        op.op_add(result)
+        subdomains = claw_subdomains(domain)
+        subdomains.append(domain)
+        for subdomain in subdomains:
+            result = multi_request_domain(subdomain)
+            op.op_add(result)
 
