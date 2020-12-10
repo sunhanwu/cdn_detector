@@ -10,6 +10,7 @@ from database.database import session
 from sqlalchemy.ext.declarative import declarative_base
 from utils.config import node_info      # TODO
 from utils.utils import getRandomNameServer
+import ipdb
 
 Base = declarative_base()
 

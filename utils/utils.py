@@ -54,7 +54,7 @@ def getRandomNameServer():
     :return:
     """
     nameServerIPS = list(serverNames.values())
-    random_indexs = random.sample(range(0, 20), 5)
+    random_indexs = random.sample(range(0, 16), 5)
     return [nameServerIPS[x] for x in random_indexs]
 
 
