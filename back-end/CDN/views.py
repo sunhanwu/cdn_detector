@@ -39,6 +39,6 @@ def listcustomers(request,domain):
         op.op_add(result)
     #查找该域名以及底下的CDN
     lists=op.op_select(domain)
-    return JsonResponse({'ret': 0, 'retlist': lists})
+    return JsonResponse({'ret': 0, 'msg': lists})
 
 
