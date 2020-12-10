@@ -74,7 +74,7 @@ class operation():
         for dns in dns1_research_list:
             # print('查询前的域名：', dns1_research_list)
             # print('查询的域名：', dns)
-            cname_record_result = self.session.query(CNAME.dns1.like("%{}%".format(dns)))
+            cname_record_result = self.session.query(CNAME).filter(CNAME.dns1.like("%{}%".format(dns)))
             # print(cname_record_result)    # 只是一条SQL语句
 
             # 将查询cname结果放到要查询的列表中，后续继续迭代查询

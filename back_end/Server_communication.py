@@ -11,7 +11,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from utils.config import node_info      # TODO
 from utils.utils import getRandomNameServer
 from dns_query.clawer_doamins import claw_subdomains
-import ipdb
+# import ipdb
 
 Base = declarative_base()
 
