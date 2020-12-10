@@ -67,8 +67,8 @@ class operation():
         :return: 与dns有关的所有cname在a表中的记录
         '''
 
-        dns1_all_cname_list = []    # 保存于dns1所有有关的cname
-        dns1_research_list = [dns1]     # 用于存储在cname表中查询的dns1.（包括查询出来的dns2）
+        dns1_all_cname_list = []  # 保存于dns1所有有关的cname
+        dns1_research_list = [dns1]  # 用于存储在cname表中查询的dns1.（包括查询出来的dns2）
 
         # 查询dns1所有的cname
         for dns in dns1_research_list:
@@ -84,20 +84,44 @@ class operation():
                 # 判断一下是否已经在查询的表里了。
                 if record.dns2 not in dns1_research_list:
                     dns1_research_list.append(record.dns2)
-                    dns1_all_cname_list.append(record.dns2)     # 保存每次查询的结果
+                    dns1_all_cname_list.append(record.dns2)  # 保存每次查询的结果
 
             # print('查询后的新结果：', dns1_research_list)
 
         # 查询cname的a记录
         a_all_list = []
+        cdn_list = []
         # a_record = []
+        index = 1
         for dns_r in dns1_all_cname_list:
             a_record_result = self.session.query(A).filter_by(dns=dns_r)
+            state_depth_great1 = None
+            # 注意，这里要注意，不能简单地遍历次数，以为可能IP是一样的，只是递归服务器不一样而已。
+            ip_list = []
             for record in a_record_result:
-                a_record = [record.dns, record.ip, record.area, record.depth]
+                a_record = {'domain_name': record.dns, 'ip_addr': record.ip, 'recur_server': record.area,
+                            'depth': record.depth}
                 a_all_list.append(a_record)
+                ip_list.append(record.ip)
+                if record.depth >= 1:  # 深度大于等于1
+                    state_depth_great1 = True
 
-        return a_all_list
+            # 如果深度大于等于1且IP个数大于等于2
+            if state_depth_great1 & (len(set(ip_list)) >= 2):
+                strs = 'cdn_' + str(index)
+                cdn_list.append({strs: a_all_list[-1]['domain_name']})
+                index += 1
+                # temp_cdn = a_all_list[-1].copy()    # 深拷贝，不共用地址
+                # dic_ip = {}
+                # index = 1
+                # for i in set(ip_list):
+                #     strs = 'ip_'+str(index)
+                #     dic_ip[strs] = i
+                #     index += 1
+                # temp_cdn['ip_addr'] = dic_ip
+                # cdn_list.append(temp_cdn)
+
+        return a_all_list, cdn_list
 
     def op_del(self):
         pass
