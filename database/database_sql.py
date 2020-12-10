@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')
 from database.database import session, A, CNAME
-from utils.utils import logger_database as logger
+# from utils.utils import logger_database as logger
 
 
 class operation():

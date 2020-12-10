@@ -72,10 +72,10 @@ def log(name):
     logger.setLevel(logging.INFO)
     return logger
 
-logger_commucination = log('commucination')
-logger_dnsquery = log('dns-query')
-logger_database = log('database')
-logger_clawer = log('clawer')
+# logger_commucination = log('commucination')
+# logger_dnsquery = log('dns-query')
+# logger_database = log('database')
+# logger_clawer = log('clawer')
 
 
 
