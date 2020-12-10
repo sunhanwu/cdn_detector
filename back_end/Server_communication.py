@@ -10,7 +10,8 @@ from database.database import session
 from sqlalchemy.ext.declarative import declarative_base
 from utils.config import node_info      # TODO
 from utils.utils import getRandomNameServer
-import ipdb
+from dns_query.clawer_doamins import claw_subdomains
+# import ipdb
 
 Base = declarative_base()
 
@@ -79,16 +80,15 @@ def multi_request_domain_pool(domains:list, jobs=1):
 
 
 if __name__ == '__main__':
-    data_path = "../data/top-1m-12-08.csv"
+    data_path = "../data/1_top-1m-12-08.csv"
     domain_list = pd.read_csv(data_path, header=None, encoding="utf-8")
     # 数据库连接初始化
     op = operation(session)
     for index in range(0, len(domain_list)):
-        domain = domain_list.iloc[index, 1]
-        # for domain in domain_group:
-        #     if op.is_exist(domain):
-        #         domain_group.remove(domain)
-        # domain_group_result = multi_request_domain_pool(domain_group)
-        result = multi_request_domain(domain)
-        op.op_add(result)
+        domain = domain_list.iloc[index, 2]
+        subdomains = claw_subdomains(domain)
+        subdomains.append(domain)
+        for subdomain in subdomains:
+            result = multi_request_domain(subdomain)
+            op.op_add(result)
 
