@@ -136,8 +136,9 @@ export default {
         .then((response) => {
           console.log('7',response)
           var res = JSON.parse(response.bodyText)
-          this.bookList=res.msg
-          console.log('1',this.bookList)        })
+          this.bookList=res.msg[0]
+          console.log('1',this.bookList) 
+         })
 
 
         console.log(this.search) 
