@@ -93,19 +93,11 @@ export default {
         }
     },
     mounted() { 
-        this.getlist();              
-        // this.test();
-        this.init();  
+        this.getlist();
   },
     methods: {
     export1(data){
       window.open(data,'_blank'); 
-    },
-    searchnews(){
-      this.search=this.$route.query.search
-      console.log(this.search)
-        this.data = [{rawdomain:'1',cdndomain:'www.baidu.com',region:'China',ipaddress:'192.123.123.1'}]        
-        $('#CDN').bootstrapTable("load", this.data)
     },
     getlist(){
         this.search=this.$route.query.search
@@ -115,23 +107,8 @@ export default {
           var res = JSON.parse(response.bodyText)
           console.log('7',res)
           this.bookList=res.mysql_lists[0]
-          this.vislist =res.neo4j_lists          
-          console.log('1',this.bookList) 
-          this.vislist[0].forEach((i,index)=>{
-            // console.log(i)
-            if(i.domain_name){
-              this.nodes[index]={id:i.id,label:i.domain_name,image:'@/image.png'}
-            }
-            if(i.ip){
-              this.nodes[index]={id:i.id,label:i.ip,image:'@/image.png'}
-            }
-          }) 
-          console.log('3',this.nodes)        
-          this.vislist[1].forEach((i,index)=>{
-            // console.log(i)
-          this.edges[index] = {from: i['from'],to: i['to'], label:i['label']}
-          })
-      console.log('123',this.edges)
+          // this.vislist =res.neo4j_lists          
+          console.log('1',this.bookList)           
           this.bookList.forEach((i,index)=>{
             // console.log(i)
             if(i.recur_server=="219.141.140.10"){
@@ -197,7 +174,8 @@ export default {
           }),
           $('#CDN').bootstrapTable({
             data: this.bookList
-            }) 
+            })                        
+          this.test();  
          })
     },
     btn:function(){
@@ -208,7 +186,7 @@ export default {
           // console.log('1',product)
           return Object.keys(product).some(function(key) {
             // console.log('2',key)
-            return String(product['ip_addr']).toLowerCase().indexOf(search) > -1
+            return String(product['domain_name']).toLowerCase().indexOf(search) > -1
           })
         })
         $('#CDN').bootstrapTable("load", this.searchData)  
@@ -258,7 +236,7 @@ export default {
 			                   },
 			            },
 			            nodes: {
-			              shape: 'circularImage',
+			              shape: 'image',
 			              font: {
 			                bold: {
 			                  color: "red",
@@ -294,46 +272,27 @@ export default {
 			       _this.network = new vis.Network(container, data,  _this.options);
           },
     test(){
-      this.nodes=  [
-			            { id: 1, 
-			              label: "This is a\nsingle-font label",
-			              image:'@/image.png',
-			              title:'space',  
-                        },
-			            {
-			              id: 2,
-			              font: { multi: true },
-			              label: "<b>This</b> is a\n<i>default</i> <b><i>multi-</i>font</b> <code>label</code>",
-			              image:'@/image.png',
-			              title:'earth',  
-			            },
-			            {
-			              id: 3,
-			              font: { multi: "html", size: 20 },
-			              label: "<b>This</b> is an\n<i>html</i> <b><i>multi-</i>font</b> <code>label</code>",
-			              image:'@/image.png',
-			              title:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1924443930,1818184200&fm=26&gp=0.jpg',  
-			            },
-			            {
-			              id: 4,
-			              label: "markdown",
-			              image:'@/image.png',
-			              title:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2299626866,2306729894&fm=26&gp=0.jpg',  
-			            },
-			            {
-			              id: 5,
-			              font: { multi: "md", face: "georgia", },
-			              label: "*This* is a\n_markdown_ *_multi-_ font* `label`",
-			              image:'@/image.png',   
-			              title:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3443312632,4280189108&fm=26&gp=0.jpg',        
-			            },
-              ];
-      this.edges =[
-			            { from: 1, to: 2, label: "single to default" },
-			            { from: 2, to: 3, font: { multi: true }, label: "default to <b>html</b>" },
-			            { from: 2, to: 4, font: { multi: "md" }, label: "*html* to _md_" },
-			            { from: 2, to: 5, font: { multi: "md" }, label: "*html* to _md_" },
-              ];
+      this.$http.get('http://127.0.0.1:8000/query/neo4j?domain=' + this.search)
+      .then((response) => {
+        var res = JSON.parse(response.bodyText)
+          console.log('10',res)
+          this.vislist =res.neo4j_lists
+          this.vislist[0].forEach((i,index)=>{
+            // console.log(i)
+            if(i.domain_name){
+              this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/%E5%9F%9F%E5%90%8D-e2350ec15bc34b67b9150ad9e42cd96b.png'}
+            }
+            if(i.ip){
+              this.nodes[index]={id:i.id,label:i.ip,image:'http://sunhanwu.top:8090/upload/2020/12/ip-632484e476674fc3a433d747c6ae01f0.png'}
+            }
+          })
+           console.log(this.nodes)      
+          this.vislist[1].forEach((i,index)=>{
+            // console.log(i)
+          this.edges[index] = {from: i['from'],to: i['to'], label:i['label']}
+          }) 
+        this.init();
+      })
     }
 			  }
       
