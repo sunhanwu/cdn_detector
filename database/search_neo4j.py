@@ -21,11 +21,20 @@ def search_domain_from_neo4j(domain):
         for item in data:
             p = item['p']
             for pair in p.relationships:
+                # 判断start_node的类型是CDN节点还是普通域名节点
+                if 'CDN' in pair.start_node.__str__():
+                    start_node_type = 'cdn'
+                else:
+                    start_node_type = 'domain'
+                # 判断end_node节点是IP节点还是cdn或者普通域名节点
                 if 'IP' in pair.end_node.__str__():
                     end_node_type = 'IP'
+                elif 'CDN' in pair.end_node.__str__():
+                    end_node_type = 'cdn'
                 else:
                     end_node_type = 'domain'
                 start_node = {'domain_name': pair.start_node['domain_name'], 'IF_CDN': pair.start_node['IF_CDN']}
+                start_node['type'] = start_node_type
                 if start_node['domain_name'] not in exist_domains.keys():
                     exist_domains[start_node['domain_name']] = len(list(exist_domains.keys())) + 1
                     start_node_id = exist_domains[start_node['domain_name']]
@@ -33,8 +42,9 @@ def search_domain_from_neo4j(domain):
                     nodes.append(start_node)
                 else:
                     start_node_id = exist_domains[start_node['domain_name']]
-                if end_node_type == 'domain':
+                if end_node_type in ['domain', 'cdn']:
                     end_node = {'domain_name': pair.end_node['domain_name'], 'IF_CDN': pair.end_node['IF_CDN']}
+                    end_node['type'] = end_node_type
                     if end_node['domain_name'] not in exist_domains.keys():
                         exist_domains[end_node['domain_name']] = len(list(exist_domains.keys())) + 1
                         end_node_id = exist_domains[end_node['domain_name']]
@@ -44,6 +54,7 @@ def search_domain_from_neo4j(domain):
                         end_node_id = exist_domains[end_node['domain_name']]
                 else:
                     end_node = {'ip': pair.end_node['ip_add'], 'area': pair.end_node['area']}
+                    end_node['type'] = end_node_type
                     if end_node['ip'] not in exist_domains.keys():
                         exist_domains[end_node['ip']] = len(list(exist_domains.keys())) + 1
                         end_node_id = exist_domains[end_node['ip']]
