@@ -5,6 +5,7 @@ import sys
 sys.path.append("../..")
 import json
 from database.database_sql import operation
+from database.search_neo4j import search_domain_from_neo4j
 from database.database import session
 #from sqlalchemy.ext.declarative import declarative_base
 sys.path.append("../../back-end")
@@ -44,7 +45,9 @@ def listcustomers(request,domain):
         result = multi_request_domain(domain)
         op.op_add(result)
     #查找该域名以及底下的CDN
-    lists=op.op_select(domain)
-    return JsonResponse({'ret': 0, 'msg': lists})
+    mysql_lists=op.op_select(domain)
+    #查找图数据库
+    neo4j_lists=search_domain_from_neo4j(domain)
+    return JsonResponse({'ret': 0, 'mysql_lists': mysql_lists, "neo4j_lists": neo4j_lists})
 
 
