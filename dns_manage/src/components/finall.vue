@@ -1,18 +1,22 @@
 <template>
     <div>
         <div class="ibox-title">
-                <h5>查询结果</h5>
+                <h5>DNS网络拓扑图</h5>
             </div>
-        <el-row>  
+        <el-row>    
+          <div class="mynetwork" id="mynetwork"></div>
+        </el-row>
+                <el-row>  
         <el-card>
-        <!-- <div id="toolbar">
+        <div >
             <div class="ibox-title">
-                <h5>查询结果</h5>
+              <el-input v-model="input" placeholder="请输入CDN域名" style="display:inline-table; width: 10%; float:left" @input.native="btn()" ></el-input>
+                <h5>域名IP信息</h5>
             </div>
-        </div> -->   
-        <el-input v-model="input" placeholder="请输入CDN域名" style="display:inline-table; width: 10%; float:left" @input.native="btn()" ></el-input>
+        </div>      
           <table
             id="CDN"
+            data-height="500"
             class="table table-bordered table-striped"
             data-classes="table table-hover table-condensed"
             data-mobile-responsive="true"
@@ -29,7 +33,7 @@
             data-click-to-select="true">
             <thead>
                 <tr>
-                <th data-field="domain_name" >原始域名</th>
+                <th data-field="domain_name">原始域名</th>
                 <th data-field="ip_addr">CDN_IP</th>
                 <th data-field="depth">深度</th>
                 <th data-field="recur_server">地区</th>
@@ -38,9 +42,6 @@
           </table>
             <!--data-url="/dns-serve/api/domainExhibition/blacklist/whitelisttop10"/>-->       
         </el-card>
-        </el-row>
-        <el-row>    
-          <div class="mynetwork" id="mynetwork"></div>
         </el-row>  
      </div>   
 </template>
@@ -109,7 +110,26 @@ export default {
           console.log('7',response)
           var res = JSON.parse(response.bodyText)
           console.log('7',res)
-          this.bookList=res.mysql_lists[0]
+          this.bookList=res.mysql_lists
+          this.vislist =res.neo4j_
+          console.log('1111',this.vislist)
+          this.vislist[0].forEach((i,index)=>{
+            // console.log(i)
+            if(i.type=='domain'){
+              this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/%E5%9F%9F%E5%90%8D-e2350ec15bc34b67b9150ad9e42cd96b.png'}
+            }
+            if(i.type=='ip'){
+              this.nodes[index]={id:i.id,label:i.ip+'('+i.area+')',image:'http://sunhanwu.top:8090/upload/2020/12/ip-632484e476674fc3a433d747c6ae01f0.png'}
+            }
+            if(i.type=='cdn'){
+              this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/%E5%9F%9F%E5%90%8D%20(2)-7f78d899f94243ac8b2591ee1c46f9b0.png'}
+            }
+          })
+          this.vislist[1].forEach((i,index)=>{
+            // console.log(i)
+          this.edges[index] = {from: i['from'],to: i['to'], label:i['label']}
+          })
+          this.init(); 
           // this.vislist =res.neo4j_lists          
           console.log('1',this.bookList)           
           this.bookList.forEach((i,index)=>{
@@ -178,7 +198,7 @@ export default {
           $('#CDN').bootstrapTable({
             data: this.bookList
             })                        
-          this.test();  
+          // this.test();  
          })
     },
     btn:function(){
