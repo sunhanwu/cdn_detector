@@ -51,7 +51,7 @@ def search_domain_from_neo4j(domain):
                 else:
                     end_node_id = exist_domains[end_node['ip']]
             edge = {'from': start_node_id, 'to': end_node_id}
-            if p.relationships.__str__()['1'] == 'A':
+            if p.relationships.__str__()[1] == 'A':
                 edge['label'] = "A"
             else:
                 edge['label'] = "CNAME"
