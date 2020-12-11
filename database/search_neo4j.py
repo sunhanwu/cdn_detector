@@ -20,8 +20,11 @@ def search_domain_from_neo4j(domain):
         exist_domains = {}
         for item in data:
             p = item['p']
+            if 'IP' in end_node.__str__():
+                end_node_type = 'IP'
+            else:
+                end_node_type = 'domain'
             start_node = {'domain_name': p.start_node['domain_name'], 'IF_CDN': p.start_node['IF_CDN']}
-            end_node = {'domain_name': p.end_node['domain_name'], 'IF_CDN': p.end_node['IF_CDN']}
             if start_node['domain_name'] not in exist_domains.keys():
                 exist_domains[start_node['domain_name']] = len(list(exist_domains.keys())) + 1
                 start_node_id = exist_domains[start_node['domain_name']]
@@ -29,13 +32,24 @@ def search_domain_from_neo4j(domain):
                 nodes.append(start_node)
             else:
                 start_node_id = exist_domains[start_node['domain_name']]
-            if end_node['domain_name'] not in exist_domains.keys():
-                exist_domains[end_node['domain_name']] = len(list(exist_domains.keys())) + 1
-                end_node_id = exist_domains[end_node['domain_name']]
-                end_node['id'] = end_node_id
-                nodes.append(end_node)
+            if end_node_type == 'domain':
+                end_node = {'domain_name': p.end_node['domain_name'], 'IF_CDN': p.end_node['IF_CDN']}
+                if end_node['domain_name'] not in exist_domains.keys():
+                    exist_domains[end_node['domain_name']] = len(list(exist_domains.keys())) + 1
+                    end_node_id = exist_domains[end_node['domain_name']]
+                    end_node['id'] = end_node_id
+                    nodes.append(end_node)
+                else:
+                    end_node_id = exist_domains[end_node['domain_name']]
             else:
-                end_node_id = exist_domains[end_node['domain_name']]
+                end_node = {'ip': p.end_node['ip'], 'area': p.end_node['area']}
+                if end_node['ip'] not in exist_domains.keys():
+                    exist_domains[end_node['ip']] = len(list(exist_domains.keys())) + 1
+                    end_node_id = exist_domains[end_node['ip']]
+                    end_node['id'] = end_node_id
+                    nodes.append(end_node)
+                else:
+                    end_node_id = exist_domains[end_node['ip']]
             edge = {'from': start_node_id, 'to': end_node_id}
             if p.relationships.__str__()[1] == 'A':
                 edge['label'] = "A"
