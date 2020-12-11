@@ -286,10 +286,10 @@ export default {
               this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/%E5%9F%9F%E5%90%8D-e2350ec15bc34b67b9150ad9e42cd96b.png'}
             }
             if(i.type=='ip'){
-              this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/ip-632484e476674fc3a433d747c6ae01f0.png'}
+              this.nodes[index]={id:i.id,label:i.ip,image:'http://sunhanwu.top:8090/upload/2020/12/ip-632484e476674fc3a433d747c6ae01f0.png'}
             }
             if(i.type=='cdn'){
-              this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/ip-e27c8c0854dc4f0080ce9e121d9650e2.png'}
+              this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/%E5%9F%9F%E5%90%8D%20(2)-7f78d899f94243ac8b2591ee1c46f9b0.png'}
             }
           })
            console.log(this.nodes)      
