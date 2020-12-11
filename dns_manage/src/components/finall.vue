@@ -50,7 +50,7 @@ export default {
     data(){
         return{
           bookList:[],
-          bookList1:[], 
+          vislist:[], 
           search:'',
           input:'',
           columnsWhite: [
@@ -93,9 +93,9 @@ export default {
         }
     },
     mounted() { 
-        this.test();
         this.getlist();
-        this.init();
+        this.init();        
+        // this.test();
   },
     methods: {
     export1(data){
@@ -113,8 +113,15 @@ export default {
         .then((response) => {
           console.log('7',response)
           var res = JSON.parse(response.bodyText)
-          this.bookList=res.msg[0]
-          console.log('1',this.bookList)
+          console.log('7',res)
+          this.bookList=res.mysql_lists[0]
+          this.vislist =res.neo4j_lists          
+          console.log('1',this.bookList)          
+          this.vislist[1].forEach((i,index)=>{
+            console.log(i)
+          this.edges[index] = {from: i['from'],to: i['to'], label:i['label']}
+          })
+      console.log('123',this.edges)
           this.bookList.forEach((i,index)=>{
             // console.log(i)
             if(i.recur_server=="219.141.140.10"){
@@ -280,34 +287,34 @@ export default {
       this.nodes=  [
 			            { id: 1, 
 			              label: "This is a\nsingle-font label",
-			              image:'@/image.jpg',
+			              image:'@/image.png',
 			              title:'space',  
                         },
 			            {
 			              id: 2,
 			              font: { multi: true },
 			              label: "<b>This</b> is a\n<i>default</i> <b><i>multi-</i>font</b> <code>label</code>",
-			              image:'@/image.jpg',
+			              image:'@/image.png',
 			              title:'earth',  
 			            },
 			            {
 			              id: 3,
 			              font: { multi: "html", size: 20 },
 			              label: "<b>This</b> is an\n<i>html</i> <b><i>multi-</i>font</b> <code>label</code>",
-			              image:'@/image.jpg',
+			              image:'@/image.png',
 			              title:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1924443930,1818184200&fm=26&gp=0.jpg',  
 			            },
 			            {
 			              id: 4,
 			              label: "markdown",
-			              image:'@/image.jpg',
+			              image:'@/image.png',
 			              title:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2299626866,2306729894&fm=26&gp=0.jpg',  
 			            },
 			            {
 			              id: 5,
 			              font: { multi: "md", face: "georgia", },
 			              label: "*This* is a\n_markdown_ *_multi-_ font* `label`",
-			              image:'@/image.jpg',   
+			              image:'@/image.png',   
 			              title:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3443312632,4280189108&fm=26&gp=0.jpg',        
 			            },
               ];
@@ -316,7 +323,7 @@ export default {
 			            { from: 2, to: 3, font: { multi: true }, label: "default to <b>html</b>" },
 			            { from: 2, to: 4, font: { multi: "md" }, label: "*html* to _md_" },
 			            { from: 2, to: 5, font: { multi: "md" }, label: "*html* to _md_" },
-			        ];
+              ];
     }
 			  }
       

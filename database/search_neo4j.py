@@ -11,7 +11,7 @@ def search_domain_from_neo4j(domain):
     return: nodes:list, edges:list, node_item:{'id':1,'domain_name':'www.baidu.com.', 'IF_CDN':false}, edge_item:{'from': 1, 'end':2, label: A}
     """
     try:
-        cypher_cmd = "match p=(n:domain{domain_name:'{}'})-[*]->(:IP) return p;".format(domain)
+        cypher_cmd = "match p=(n:domain{domain_name:'%s'})-[*]->(:IP) return p;" % domain
         search_result = neo_graph.run(cypher_cmd)
         data = search_result.data()
         nodes = []
@@ -37,7 +37,7 @@ def search_domain_from_neo4j(domain):
             else:
                 end_node_id = exist_domains[end_node['domain_name']]
             edge = {'from': start_node_id, 'to': end_node_id}
-            if p.relationships.__str__()['1'] == 'A':
+            if p.relationships.__str__()[1] == 'A':
                 edge['label'] = "A"
             else:
                 edge['label'] = "CNAME"
