@@ -70,11 +70,11 @@ def mysql(request,domain):
         result = multi_request_domain(domain)
         op.op_add(result)
     #查找该域名以及底下的CDN
-    mysql_lists=op.op_select(domain)
-    mysql_neo4j
+    cname_all_list,a_all_list,cdn_list=op.op_select(domain)
+    nodes,edges=mysql_neo4j(cname_all_list,a_all_list,cdn_list)
 
 
-    return JsonResponse({'ret': 0, 'mysql_lists': mysql_lists})
+    return JsonResponse({'ret': 0, 'mysql_lists': cname_all_list,"a_all_list":a_all_list,"cdn_list":cdn_list,"nodes":nodes,"edges":edges})
 
 
 
