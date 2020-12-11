@@ -28,7 +28,7 @@ def neo4j_mysql(session,neo_graph):
                 IP_list=session.query(A).filter_by(dns=dns1).all()
                 for i in IP_list:
                     IP = Node("IP",ip_add=i.ip, area=ip2name[i.area])
-                    dns_connect=Relationship(dns1_node,'domain-ip',IP)
+                    dns_connect=Relationship(dns1_node,'A',IP)
                     neo_graph.create(dns_connect)
             if matcher.match(domain_name=dns2).exists():
                 dns2_node=matcher.match(domain_name=dns2).first()
@@ -38,16 +38,16 @@ def neo4j_mysql(session,neo_graph):
                     dns2_node=Node("CDN_domain",domain_name=dns2,IF_CDN=False)
                     for i in IP_list:
                         IP = Node("IP",ip_add=i.ip, area=ip2name[i.area])
-                        dns_connect=Relationship(dns2_node,'domain-ip',IP)
+                        dns_connect=Relationship(dns2_node,'A',IP)
                         neo_graph.create(dns_connect)
                 else:
                     dns2_node=Node("domain",domain_name=dns2,IF_CDN=False)
                     for i in IP_list:
                         IP = Node("IP",ip_add=i.ip, area=ip2name[i.area])
-                        dns_connect=Relationship(dns2_node,'domain-ip',IP)
+                        dns_connect=Relationship(dns2_node,'A',IP)
                         neo_graph.create(dns_connect)
 
-            dns_connect=Relationship(dns1_node,'domain-domain',dns2_node)
+            dns_connect=Relationship(dns1_node,'CNAME',dns2_node)
             neo_graph.create(dns_connect)
             logger.info("{}-{} insert successfully".format(dns1, dns2))
         except Exception as e:
