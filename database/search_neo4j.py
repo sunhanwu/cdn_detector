@@ -20,7 +20,7 @@ def search_domain_from_neo4j(domain):
         exist_domains = {}
         for item in data:
             p = item['p']
-            if 'IP' in end_node.__str__():
+            if 'IP' in p.end_node.__str__():
                 end_node_type = 'IP'
             else:
                 end_node_type = 'domain'
@@ -42,7 +42,7 @@ def search_domain_from_neo4j(domain):
                 else:
                     end_node_id = exist_domains[end_node['domain_name']]
             else:
-                end_node = {'ip': p.end_node['ip'], 'area': p.end_node['area']}
+                end_node = {'ip': p.end_node['ip_add'], 'area': p.end_node['area']}
                 if end_node['ip'] not in exist_domains.keys():
                     exist_domains[end_node['ip']] = len(list(exist_domains.keys())) + 1
                     end_node_id = exist_domains[end_node['ip']]

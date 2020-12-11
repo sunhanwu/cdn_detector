@@ -93,9 +93,9 @@ export default {
         }
     },
     mounted() { 
-        this.getlist();
-        this.init();        
+        this.getlist();              
         // this.test();
+        this.init();  
   },
     methods: {
     export1(data){
@@ -116,9 +116,19 @@ export default {
           console.log('7',res)
           this.bookList=res.mysql_lists[0]
           this.vislist =res.neo4j_lists          
-          console.log('1',this.bookList)          
+          console.log('1',this.bookList) 
+          this.vislist[0].forEach((i,index)=>{
+            // console.log(i)
+            if(i.domain_name){
+              this.nodes[index]={id:i.id,label:i.domain_name,image:'@/image.png'}
+            }
+            if(i.ip){
+              this.nodes[index]={id:i.id,label:i.ip,image:'@/image.png'}
+            }
+          }) 
+          console.log('3',this.nodes)        
           this.vislist[1].forEach((i,index)=>{
-            console.log(i)
+            // console.log(i)
           this.edges[index] = {from: i['from'],to: i['to'], label:i['label']}
           })
       console.log('123',this.edges)
