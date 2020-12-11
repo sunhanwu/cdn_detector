@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="ibox-title">
+                <h5>查询结果</h5>
+            </div>
         <el-row>  
         <el-card>
         <!-- <div id="toolbar">
@@ -279,11 +282,14 @@ export default {
           this.vislist =res.neo4j_lists
           this.vislist[0].forEach((i,index)=>{
             // console.log(i)
-            if(i.domain_name){
+            if(i.type=='domain'){
               this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/%E5%9F%9F%E5%90%8D-e2350ec15bc34b67b9150ad9e42cd96b.png'}
             }
-            if(i.ip){
-              this.nodes[index]={id:i.id,label:i.ip,image:'http://sunhanwu.top:8090/upload/2020/12/ip-632484e476674fc3a433d747c6ae01f0.png'}
+            if(i.type=='ip'){
+              this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/ip-632484e476674fc3a433d747c6ae01f0.png'}
+            }
+            if(i.type=='cdn'){
+              this.nodes[index]={id:i.id,label:i.domain_name,image:'http://sunhanwu.top:8090/upload/2020/12/ip-e27c8c0854dc4f0080ce9e121d9650e2.png'}
             }
           })
            console.log(this.nodes)      
