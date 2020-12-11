@@ -1,6 +1,6 @@
 from py2neo import Graph, Node, Relationship
 from py2neo.matching import NodeMatcher
-
+from database.database import session, A, CNAME
 neo_graph = Graph(
     "http://node1.sunhanwu.top:7474",
     username="neo4j",
