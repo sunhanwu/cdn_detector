@@ -1,7 +1,8 @@
 import sys
 sys.path.append('../')
 from database.database import session, A, CNAME
-# from utils.utils import logger_database as logger
+from utils.utils import logger_database as logger
+from utils.config import ip2name
 
 
 class operation():
@@ -69,10 +70,8 @@ class operation():
 
         dns1_all_cname_list = []    # 保存于dns1所有有关的cname
         dns1_research_list = [dns1]     # 用于存储在cname表中查询的dns1.（包括查询出来的dns2）
-
+        cname_all_list=[]
         # 查询dns1所有的cname
-
-
         for dns in dns1_research_list:
             # print('查询前的域名：', dns1_research_list)
             # print('查询的域名：', dns)
@@ -85,9 +84,9 @@ class operation():
                 result_length += 1
                 # 判断一下是否已经在查询的表里了。
                 if record.dns2 not in dns1_research_list:
+                    cname_all_list.append({"dns1":record.dns1, "dns2":record.dns2, "area":record.area})
                     dns1_research_list.append(record.dns2)
                     dns1_all_cname_list.append(record.dns2)     # 保存每次查询的结果
-
             # print('查询后的新结果：', dns1_research_list)
 
         # 查询cname的a记录
@@ -122,13 +121,76 @@ class operation():
                 # temp_cdn['ip_addr'] = dic_ip
                 # cdn_list.append(temp_cdn)
 
-        return a_all_list, cdn_list
+        return cname_all_list, a_all_list, cdn_list
 
     def op_del(self):
         pass
 
     def op_chg(self):
         pass
+
+def mysql_neo4j(cname_all_list,a_all_list,cdn_list):
+    """
+    从op_select 查询的数据转换为前端需要的neo4j格式的数据
+    """
+    new_cdn_list = []
+    for cdn_item in cdn_list:
+        new_cdn_list += list(cdn_item.values())
+    cdn_list = new_cdn_list
+    #初始化
+    node_index_dict = {}
+    nodes_list = []
+    edges_list = []
+    id=0
+    for item in cname_all_list:
+        if item["dns1"] not in node_index_dict:
+            node_dict = {}
+            node_index_dict[item["dns1"]]=id
+            node_dict["domain_name"] =item["dns1"]
+            node_dict["id"]=id
+            if item["dns1"] in cdn_list:
+                node_dict["type"]="cdn"
+            else:
+                node_dict["type"]="domain"
+            id+=1
+            nodes_list.append(node_dict)
+
+        if item["dns2"] not in node_index_dict:
+            node_index_dict[item["dns2"]]=id
+            node_dict = {}
+            node_index_dict[item["dns2"]] = id
+            node_dict["domain_name"] = item["dns2"]
+            node_dict["id"] = id
+            if item["dns2"] in cdn_list:
+                node_dict["type"] = "cdn"
+            else:
+                node_dict["type"] = "domain"
+            id += 1
+            nodes_list.append(node_dict)
+        edge_dict={}
+        edge_dict["from"]=node_index_dict[item["dns1"]]
+        edge_dict["to"]=node_index_dict[item["dns2"]]
+        edge_dict["label"] = "CNAME"
+        edges_list.append(edge_dict)
+    for item in a_all_list:
+        if item["ip_addr"] not in node_index_dict:
+            node_index_dict[item["ip_addr"]] = id
+            node_dict = {}
+            node_index_dict[item["ip_addr"]] = id
+            node_dict["ip"] = item["ip_addr"]
+            node_dict["id"] = id
+            node_dict["type"] = "ip"
+            node_dict["area"]=ip2name[item["recur_server"]]
+            id += 1
+            nodes_list.append(node_dict)
+        edge_dict = {}
+        edge_dict["from"] = node_index_dict[item["domain_name"]]
+        edge_dict["to"] = node_index_dict[item["ip_addr"]]
+        edge_dict["label"] = "A"
+        edges_list.append(edge_dict)
+    return nodes_list, edges_list
+
+
 
 if __name__ == '__main__':
     data = {
@@ -168,7 +230,8 @@ if __name__ == '__main__':
     }
 
     op = operation(session)
-    op.op_add(data)
+    # op.op_add(data)
+    op.op_select('www.bing.com.')
 
 
 
