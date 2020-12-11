@@ -130,6 +130,13 @@ class operation():
         pass
 
 def mysql_neo4j(cname_all_list,a_all_list,cdn_list):
+    """
+    从op_select 查询的数据转换为前端需要的neo4j格式的数据
+    """
+    new_cdn_list = []
+    for cdn_item in cdn_list:
+        new_cdn_list += list(cdn_item.values())
+    cdn_list = new_cdn_list
     #初始化
     node_index_dict = {}
     nodes_list = []
@@ -146,7 +153,7 @@ def mysql_neo4j(cname_all_list,a_all_list,cdn_list):
             else:
                 node_dict["type"]="domain"
             id+=1
-        nodes_list.append(node_dict)
+            nodes_list.append(node_dict)
 
         if item["dns2"] not in node_index_dict:
             node_index_dict[item["dns2"]]=id
@@ -159,7 +166,7 @@ def mysql_neo4j(cname_all_list,a_all_list,cdn_list):
             else:
                 node_dict["type"] = "domain"
             id += 1
-        nodes_list.append(node_dict)
+            nodes_list.append(node_dict)
         edge_dict={}
         edge_dict["from"]=node_index_dict[item["dns1"]]
         edge_dict["to"]=node_index_dict[item["dns2"]]
@@ -167,10 +174,10 @@ def mysql_neo4j(cname_all_list,a_all_list,cdn_list):
         edges_list.append(edge_dict)
     for item in a_all_list:
         if item["ip_addr"] not in node_index_dict:
-            node_index_dict[item["dns2"]] = id
+            node_index_dict[item["ip_addr"]] = id
             node_dict = {}
-            node_index_dict[item["dns2"]] = id
-            node_dict["ip"] = item["dns2"]
+            node_index_dict[item["ip_addr"]] = id
+            node_dict["ip"] = item["ip_addr"]
             node_dict["id"] = id
             node_dict["type"] = "ip"
             node_dict["area"]=ip2name[item["recur_server"]]
