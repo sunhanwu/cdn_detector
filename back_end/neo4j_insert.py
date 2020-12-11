@@ -3,13 +3,9 @@ sys.path.append('..')
 from py2neo import Graph,Node,Relationship
 from database.database import session, A, CNAME
 from py2neo.matching import NodeMatcher
-from utils.config import ip2name
+from utils.config import ip2name, neo_graph
 from utils.utils import logger_neo4j as logger
-neo_graph = Graph(
-    "http://node1.sunhanwu.top:7474",
-     username="neo4j",
-     password="sunhanwu"
-)
+
 import sys
 sys.path.append("../")
 #循环mysql的CNAME表

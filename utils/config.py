@@ -1,4 +1,5 @@
 import sys
+from py2neo import Graph
 sys.path.append('/home/sunhanwu/cdn_detector')
 db_config = {
     'host': 'www.sunhanwu.top',
@@ -7,6 +8,11 @@ db_config = {
     'password': 'cdn_123456',
     'database': 'cdn'
 }
+neo_graph = Graph(
+    "http://node1.sunhanwu.top:7474",
+     username="neo4j",
+     password="sunhanwu"
+)
 
 with open('../dns_query/dns_servers.txt', 'r',encoding="utf-8") as f:
     serverNames = {x.strip().split(':')[0]: x.strip().split(':')[1] for x in f.readlines()}
