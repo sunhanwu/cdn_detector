@@ -22,13 +22,13 @@ def search_domain_from_neo4j(domain):
             p = item['p']
             for pair in p.relationships:
                 # 判断start_node的类型是CDN节点还是普通域名节点
-                if 'CDN' in pair.start_node.__str__():
+                if 'CDN_domain' in pair.start_node.__str__():
                     start_node_type = 'cdn'
                 else:
                     start_node_type = 'domain'
                 # 判断end_node节点是IP节点还是cdn或者普通域名节点
                 if 'IP' in pair.end_node.__str__():
-                    end_node_type = 'IP'
+                    end_node_type = 'ip'
                 elif 'CDN' in pair.end_node.__str__():
                     end_node_type = 'cdn'
                 else:
