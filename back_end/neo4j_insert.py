@@ -48,6 +48,8 @@ def neo4j_mysql(session,neo_graph):
             logger.info("{}-{} insert successfully".format(dns1, dns2))
         except Exception as e:
             logger.error("neo4j insert error {}".format(e))
+
+
             
 if __name__ == '__main__':
     neo4j_mysql(session,neo_graph)
