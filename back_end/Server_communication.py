@@ -80,7 +80,11 @@ def multi_request_domain_pool(domains:list, jobs=1):
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD:back-end/Server_communication.py
+    data_path = "../data/2_top-1m-12-08.csv"
+=======
     data_path = "../data/1_top-1m-12-08.csv"
+>>>>>>> 7ca8078d9ed1bf788c3090356aecf3b727745ed5:back_end/Server_communication.py
     domain_list = pd.read_csv(data_path, header=None, encoding="utf-8")
     # 数据库连接初始化
     op = operation(session)

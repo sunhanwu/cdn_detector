@@ -71,6 +71,8 @@ class operation():
         dns1_research_list = [dns1]     # 用于存储在cname表中查询的dns1.（包括查询出来的dns2）
 
         # 查询dns1所有的cname
+
+
         for dns in dns1_research_list:
             # print('查询前的域名：', dns1_research_list)
             # print('查询的域名：', dns)
