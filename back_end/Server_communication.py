@@ -1,3 +1,7 @@
+"""
+Author: Sun Peishuai
+Date: 2020-12-08
+"""
 import sys
 sys.path.append("../")
 from utils.utils import request_domain

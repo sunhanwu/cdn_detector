@@ -1,3 +1,7 @@
+"""
+Author: Sun Peishuai
+Date: 2020-12-08
+"""
 """mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:

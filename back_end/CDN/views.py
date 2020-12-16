@@ -1,3 +1,7 @@
+"""
+Author: Sun Peishuai
+Date: 2020-12-08
+"""
 # from  CDN.models import CDN_urls
 from django.http import JsonResponse, HttpResponseServerError, HttpResponseBadRequest, HttpResponseNotFound
 # 增加对分页的支持

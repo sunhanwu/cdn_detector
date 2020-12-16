@@ -1,3 +1,7 @@
+"""
+Author: Sun Peishuai
+Date: 2020-12-08
+"""
 import py2neo
 from utils.config import neo_graph
 from utils.utils import logger_neo4j as logger
