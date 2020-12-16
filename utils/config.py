@@ -14,7 +14,7 @@ neo_graph = Graph(
      password="sunhanwu"
 )
 
-with open('./dns_query/dns_servers.txt', 'r',encoding="utf-8") as f:
+with open('../dns_query/dns_servers.txt', 'r',encoding="utf-8") as f:
     serverNames = {x.strip().split(':')[0]: x.strip().split(':')[1] for x in f.readlines()}
 ip2name = {v:k for k, v in serverNames.items()}
 
@@ -48,7 +48,7 @@ node_info = {
     }
 }
 
-log_path = './log/'
+log_path = '../log/'
 
 
 
