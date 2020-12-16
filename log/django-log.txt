@@ -90,3 +90,4 @@ WHERE `CNAME`.dns1 LIKE %(dns1_1)s]
 2020-12-16 15:27:32,329 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
 2020-12-16 15:32:41,835 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
 2020-12-16 15:35:45,545 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 16:22:16,110 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com

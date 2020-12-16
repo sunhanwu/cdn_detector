@@ -11547,3 +11547,4 @@
 2020-12-16 15:29:38,680 - cdn_detector-commucination - INFO - www.google.com,完成时间time:1.3815014362335205
 2020-12-16 15:32:41,415 - cdn_detector-commucination - INFO - www.google.com,完成时间time:1.3541772365570068
 2020-12-16 15:34:06,893 - cdn_detector-commucination - INFO - www.google.com,完成时间time:1.4722869396209717
+2020-12-16 16:22:15,765 - cdn_detector-commucination - INFO - www.google.com,完成时间time:0.3694436550140381
