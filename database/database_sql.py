@@ -133,62 +133,66 @@ def mysql_neo4j(cname_all_list,a_all_list,cdn_list):
     """
     从op_select 查询的数据转换为前端需要的neo4j格式的数据
     """
-    new_cdn_list = []
-    for cdn_item in cdn_list:
-        new_cdn_list += list(cdn_item.values())
-    cdn_list = new_cdn_list
-    #初始化
-    node_index_dict = {}
-    nodes_list = []
-    edges_list = []
-    id=0
-    for item in cname_all_list:
-        if item["dns1"] not in node_index_dict:
-            node_dict = {}
-            node_index_dict[item["dns1"]]=id
-            node_dict["domain_name"] =item["dns1"]
-            node_dict["id"]=id
-            if item["dns1"] in cdn_list:
-                node_dict["type"]="cdn"
-            else:
-                node_dict["type"]="domain"
-            id+=1
-            nodes_list.append(node_dict)
+    try:
+        new_cdn_list = []
+        for cdn_item in cdn_list:
+            new_cdn_list += list(cdn_item.values())
+        cdn_list = new_cdn_list
+        #初始化
+        node_index_dict = {}
+        nodes_list = []
+        edges_list = []
+        id=0
+        for item in cname_all_list:
+            if item["dns1"] not in node_index_dict:
+                node_dict = {}
+                node_index_dict[item["dns1"]]=id
+                node_dict["domain_name"] =item["dns1"]
+                node_dict["id"]=id
+                if item["dns1"] in cdn_list:
+                    node_dict["type"]="cdn"
+                else:
+                    node_dict["type"]="domain"
+                id+=1
+                nodes_list.append(node_dict)
 
-        if item["dns2"] not in node_index_dict:
-            node_index_dict[item["dns2"]]=id
-            node_dict = {}
-            node_index_dict[item["dns2"]] = id
-            node_dict["domain_name"] = item["dns2"]
-            node_dict["id"] = id
-            if item["dns2"] in cdn_list:
-                node_dict["type"] = "cdn"
-            else:
-                node_dict["type"] = "domain"
-            id += 1
-            nodes_list.append(node_dict)
-        edge_dict={}
-        edge_dict["from"]=node_index_dict[item["dns1"]]
-        edge_dict["to"]=node_index_dict[item["dns2"]]
-        edge_dict["label"] = "CNAME"
-        edges_list.append(edge_dict)
-    for item in a_all_list:
-        if item["ip_addr"] not in node_index_dict:
-            node_index_dict[item["ip_addr"]] = id
-            node_dict = {}
-            node_index_dict[item["ip_addr"]] = id
-            node_dict["ip"] = item["ip_addr"]
-            node_dict["id"] = id
-            node_dict["type"] = "ip"
-            node_dict["area"]=ip2name[item["recur_server"]]
-            id += 1
-            nodes_list.append(node_dict)
-        edge_dict = {}
-        edge_dict["from"] = node_index_dict[item["domain_name"]]
-        edge_dict["to"] = node_index_dict[item["ip_addr"]]
-        edge_dict["label"] = "A"
-        edges_list.append(edge_dict)
-    return nodes_list, edges_list
+            if item["dns2"] not in node_index_dict:
+                node_index_dict[item["dns2"]]=id
+                node_dict = {}
+                node_index_dict[item["dns2"]] = id
+                node_dict["domain_name"] = item["dns2"]
+                node_dict["id"] = id
+                if item["dns2"] in cdn_list:
+                    node_dict["type"] = "cdn"
+                else:
+                    node_dict["type"] = "domain"
+                id += 1
+                nodes_list.append(node_dict)
+            edge_dict={}
+            edge_dict["from"]=node_index_dict[item["dns1"]]
+            edge_dict["to"]=node_index_dict[item["dns2"]]
+            edge_dict["label"] = "CNAME"
+            edges_list.append(edge_dict)
+        for item in a_all_list:
+            if item["ip_addr"] not in node_index_dict:
+                node_index_dict[item["ip_addr"]] = id
+                node_dict = {}
+                node_index_dict[item["ip_addr"]] = id
+                node_dict["ip"] = item["ip_addr"]
+                node_dict["id"] = id
+                node_dict["type"] = "ip"
+                node_dict["area"]=ip2name[item["recur_server"]]
+                id += 1
+                nodes_list.append(node_dict)
+            edge_dict = {}
+            edge_dict["from"] = node_index_dict[item["domain_name"]]
+            edge_dict["to"] = node_index_dict[item["ip_addr"]]
+            edge_dict["label"] = "A"
+            edges_list.append(edge_dict)
+        return nodes_list, edges_list
+    except Exception as e:
+        logger.error('mysql_neo4j error: {}'.format(e))
+        return [], []
 
 
 
@@ -231,7 +235,12 @@ if __name__ == '__main__':
 
     op = operation(session)
     # op.op_add(data)
-    op.op_select('www.bing.com.')
+    cname, a, cdn = op.op_select('google.com.')
+    nodes, edges = mysql_neo4j(cname, a, cdn)
+    print(nodes, edges)
+
+
+
 
 
 

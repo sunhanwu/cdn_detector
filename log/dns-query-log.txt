@@ -1,0 +1,39 @@
+2020-12-16 23:55:08,621 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=www.terminalx.com&nameserver1=165.87.13.129&nameserver2=45.248.197.5&nameserver3=221.11.1.67&nameserver4=202.14.67.4&nameserver5=8.8.8.8
+2020-12-16 23:55:08,705 - cdn_detector-dns-query - ERROR - 陕西 query server www.terminalx.com failed!, All nameservers failed to answer the query www.terminalx.com. IN A: Server 221.11.1.67 UDP port 53 answered REFUSED
+2020-12-16 23:55:09,663 - cdn_detector-dns-query - ERROR - 澳大利亚 query server www.terminalx.com failed!, The DNS operation timed out after 1.0002527236938477 seconds
+2020-12-16 23:55:17,455 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=mootools.net&nameserver1=165.87.13.129&nameserver2=168.95.1.1&nameserver3=84.200.69.80&nameserver4=91.239.100.100&nameserver5=80.80.80.80
+2020-12-16 23:55:18,497 - cdn_detector-dns-query - ERROR - 台湾 query server mootools.net failed!, The DNS operation timed out after 1.0008723735809326 seconds
+2020-12-16 23:55:18,502 - cdn_detector-dns-query - ERROR - 德国 query server mootools.net failed!, The DNS operation timed out after 1.0046370029449463 seconds
+2020-12-16 23:55:18,502 - cdn_detector-dns-query - ERROR - 荷兰 query server mootools.net failed!, The DNS operation timed out after 1.0008251667022705 seconds
+2020-12-16 23:55:21,567 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=www.mootools.net&nameserver1=221.11.1.67&nameserver2=223.6.6.6&nameserver3=202.14.67.4&nameserver4=77.88.8.8&nameserver5=219.141.140.10
+2020-12-16 23:55:21,646 - cdn_detector-dns-query - ERROR - 陕西 query server www.mootools.net failed!, All nameservers failed to answer the query www.mootools.net. IN A: Server 221.11.1.67 UDP port 53 answered REFUSED
+2020-12-16 23:55:22,604 - cdn_detector-dns-query - ERROR - 杭州 query server www.mootools.net failed!, The DNS operation timed out after 1.0009987354278564 seconds
+2020-12-16 23:55:22,608 - cdn_detector-dns-query - ERROR - 俄罗斯 query server www.mootools.net failed!, The DNS operation timed out after 1.0008368492126465 seconds
+2020-12-16 23:55:22,609 - cdn_detector-dns-query - ERROR - 北京 query server www.mootools.net failed!, The DNS operation timed out after 1.0008058547973633 seconds
+2020-12-16 23:55:26,859 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=enimerosi24.gr&nameserver1=202.14.67.4&nameserver2=61.132.163.68&nameserver3=80.80.80.80&nameserver4=219.141.140.10&nameserver5=223.6.6.6
+2020-12-16 23:55:27,899 - cdn_detector-dns-query - ERROR - 安徽 query server enimerosi24.gr failed!, The DNS operation timed out after 1.0000934600830078 seconds
+2020-12-16 23:55:27,901 - cdn_detector-dns-query - ERROR - 荷兰 query server enimerosi24.gr failed!, The DNS operation timed out after 1.000845193862915 seconds
+2020-12-16 23:55:27,902 - cdn_detector-dns-query - ERROR - 北京 query server enimerosi24.gr failed!, The DNS operation timed out after 1.000847339630127 seconds
+2020-12-16 23:55:27,904 - cdn_detector-dns-query - ERROR - 杭州 query server enimerosi24.gr failed!, The DNS operation timed out after 1.0007710456848145 seconds
+2020-12-16 23:55:29,721 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=www.enimerosi24.gr&nameserver1=8.8.8.8&nameserver2=91.239.100.100&nameserver3=223.6.6.6&nameserver4=80.80.80.80&nameserver5=84.200.69.80
+2020-12-16 23:55:30,766 - cdn_detector-dns-query - ERROR - 杭州 query server www.enimerosi24.gr failed!, The DNS operation timed out after 1.0002312660217285 seconds
+2020-12-16 23:55:30,766 - cdn_detector-dns-query - ERROR - 丹麦 query server www.enimerosi24.gr failed!, The DNS operation timed out after 1.0008759498596191 seconds
+2020-12-16 23:55:30,769 - cdn_detector-dns-query - ERROR - 荷兰 query server www.enimerosi24.gr failed!, The DNS operation timed out after 1.0007882118225098 seconds
+2020-12-16 23:55:35,013 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=zismo.biz&nameserver1=84.200.69.80&nameserver2=221.11.1.67&nameserver3=79.141.82.250&nameserver4=91.239.100.100&nameserver5=168.95.1.1
+2020-12-16 23:55:35,101 - cdn_detector-dns-query - ERROR - 陕西 query server zismo.biz failed!, All nameservers failed to answer the query zismo.biz. IN A: Server 221.11.1.67 UDP port 53 answered REFUSED
+2020-12-16 23:55:38,774 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=www.zismo.biz&nameserver1=221.11.1.67&nameserver2=77.88.8.8&nameserver3=219.141.140.10&nameserver4=45.248.197.5&nameserver5=61.132.163.68
+2020-12-16 23:55:38,853 - cdn_detector-dns-query - ERROR - 陕西 query server www.zismo.biz failed!, All nameservers failed to answer the query www.zismo.biz. IN A: Server 221.11.1.67 UDP port 53 answered REFUSED
+2020-12-16 23:55:39,815 - cdn_detector-dns-query - ERROR - 北京 query server www.zismo.biz failed!, The DNS operation timed out after 1.0009746551513672 seconds
+2020-12-16 23:55:39,817 - cdn_detector-dns-query - ERROR - 澳大利亚 query server www.zismo.biz failed!, The DNS operation timed out after 1.0008289813995361 seconds
+2020-12-16 23:55:42,255 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=zebra-tv.ru&nameserver1=168.95.1.1&nameserver2=80.80.80.80&nameserver3=219.141.140.10&nameserver4=79.141.82.250&nameserver5=8.8.8.8
+2020-12-16 23:55:43,295 - cdn_detector-dns-query - ERROR - 荷兰 query server zebra-tv.ru failed!, The DNS operation timed out after 1.0000715255737305 seconds
+2020-12-16 23:55:43,297 - cdn_detector-dns-query - ERROR - 北京 query server zebra-tv.ru failed!, The DNS operation timed out after 1.0008196830749512 seconds
+2020-12-16 23:55:45,834 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=www.zebra-tv.ru&nameserver1=165.87.13.129&nameserver2=8.8.4.4&nameserver3=84.200.69.80&nameserver4=168.95.1.1&nameserver5=80.80.80.80
+2020-12-16 23:55:46,884 - cdn_detector-dns-query - ERROR - 荷兰 query server www.zebra-tv.ru failed!, The DNS operation timed out after 1.0009992122650146 seconds
+2020-12-16 23:55:51,553 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=ptc.edu&nameserver1=168.95.1.1&nameserver2=221.11.1.67&nameserver3=45.248.197.5&nameserver4=210.22.70.3&nameserver5=80.80.80.80
+2020-12-16 23:55:51,670 - cdn_detector-dns-query - ERROR - 上海 query server ptc.edu failed!, All nameservers failed to answer the query ptc.edu. IN A: Server 210.22.70.3 UDP port 53 answered REFUSED
+2020-12-16 23:55:51,672 - cdn_detector-dns-query - ERROR - 陕西 query server ptc.edu failed!, All nameservers failed to answer the query ptc.edu. IN A: Server 221.11.1.67 UDP port 53 answered REFUSED
+2020-12-16 23:55:52,631 - cdn_detector-dns-query - ERROR - 澳大利亚 query server ptc.edu failed!, The DNS operation timed out after 1.0003116130828857 seconds
+2020-12-16 23:55:52,634 - cdn_detector-dns-query - ERROR - 荷兰 query server ptc.edu failed!, The DNS operation timed out after 1.000347375869751 seconds
+2020-12-16 23:55:54,794 - cdn_detector-dns-query - INFO - QueryHandler, /query?domain=www.ptc.edu&nameserver1=223.6.6.6&nameserver2=202.14.67.4&nameserver3=221.11.1.67&nameserver4=8.8.8.8&nameserver5=165.87.13.129
+2020-12-16 23:55:54,910 - cdn_detector-dns-query - ERROR - 陕西 query server www.ptc.edu failed!, All nameservers failed to answer the query www.ptc.edu. IN A: Server 221.11.1.67 UDP port 53 answered REFUSED

@@ -1,0 +1,92 @@
+2020-12-11 18:34:28,695 - cdn_detector-django - INFO -  info, 成功请求domain:www.iqiyi.com
+2020-12-11 18:37:06,815 - cdn_detector-django - INFO -  info, 成功请求domain:www.iqiyi.com
+2020-12-11 18:37:47,102 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-11 18:38:24,789 - cdn_detector-django - ERROR -  error, HTTP 'opencdncloud.jomodns.COM.'
+2020-12-11 18:38:24,791 - cdn_detector-django - INFO -  info, 成功请求domain:baidu.com
+2020-12-11 18:39:00,040 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-11 18:57:51,349 - cdn_detector-django - ERROR -  error, HTTP (mysql.connector.errors.InterfaceError) Expected EOF packet
+[SQL: SELECT `CNAME`.dns1 AS `CNAME_dns1`, `CNAME`.dns2 AS `CNAME_dns2`, `CNAME`.area AS `CNAME_area`, `CNAME`.date AS `CNAME_date`, `CNAME`.flag AS `CNAME_flag` 
+FROM `CNAME` 
+WHERE `CNAME`.dns1 = %(dns1_1)s]
+[parameters: {'dns1_1': 'www.baidu.com'}]
+(Background on this error at: http://sqlalche.me/e/13/rvf5)
+2020-12-11 18:57:51,351 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-11 18:58:32,914 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-11 19:00:08,241 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-11 19:00:37,028 - cdn_detector-django - INFO -  info, 成功请求domain:www.facebook.com
+2020-12-11 19:02:13,086 - cdn_detector-django - INFO -  info, 成功请求domain:www.facebook.com
+2020-12-11 19:04:03,488 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-11 19:05:53,826 - cdn_detector-django - INFO -  info, 成功请求domain:www.iqiyi.com
+2020-12-11 19:06:24,192 - cdn_detector-django - INFO -  info, 成功请求domain:www.iqiyi.com
+2020-12-11 19:08:19,026 - cdn_detector-django - INFO -  info, 成功请求domain:music.qq.com
+2020-12-11 19:09:13,435 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:26:41,214 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:26:55,918 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:27:20,125 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:27:39,957 - cdn_detector-django - INFO -  info, 成功请求domain:www.iqiyi.com
+2020-12-12 04:30:49,507 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:31:09,255 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:33:37,027 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:34:42,090 - cdn_detector-django - INFO -  info, 成功请求domain:www.facebook.com
+2020-12-12 04:35:17,998 - cdn_detector-django - INFO -  info, 成功请求domain:www.absjf.com
+2020-12-12 04:35:48,394 - cdn_detector-django - INFO -  info, 成功请求domain:www.foehalbfodishf.com
+2020-12-12 04:42:23,103 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:46:03,034 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 04:56:30,832 - cdn_detector-django - INFO -  info, 成功请求domain:www.baiduim.com
+2020-12-12 04:56:49,248 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 05:05:47,146 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-12 14:20:38,824 - cdn_detector-django - ERROR -  error, HTTP (mysql.connector.errors.OperationalError) MySQL Connection not available.
+[SQL: SELECT `CNAME`.dns1 AS `CNAME_dns1`, `CNAME`.dns2 AS `CNAME_dns2`, `CNAME`.area AS `CNAME_area`, `CNAME`.date AS `CNAME_date`, `CNAME`.flag AS `CNAME_flag` 
+FROM `CNAME` 
+WHERE `CNAME`.dns1 = %(dns1_1)s]
+[parameters: [immutabledict({})]]
+(Background on this error at: http://sqlalche.me/e/13/e3q8)
+2020-12-12 14:20:38,826 - cdn_detector-django - INFO -  info, 成功请求domain:www.cuc.edu.cn
+2020-12-12 14:20:42,528 - cdn_detector-django - ERROR -  error, HTTP (sqlalchemy.exc.InvalidRequestError) Can't reconnect until invalid transaction is rolled back
+[SQL: SELECT `CNAME`.dns1 AS `CNAME_dns1`, `CNAME`.dns2 AS `CNAME_dns2`, `CNAME`.area AS `CNAME_area`, `CNAME`.date AS `CNAME_date`, `CNAME`.flag AS `CNAME_flag` 
+FROM `CNAME` 
+WHERE `CNAME`.dns1 = %(dns1_1)s]
+[parameters: [immutabledict({})]]
+2020-12-12 14:20:42,529 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-12 14:20:58,927 - cdn_detector-django - ERROR -  error, HTTP (sqlalchemy.exc.InvalidRequestError) Can't reconnect until invalid transaction is rolled back
+[SQL: SELECT `CNAME`.dns1 AS `CNAME_dns1`, `CNAME`.dns2 AS `CNAME_dns2`, `CNAME`.area AS `CNAME_area`, `CNAME`.date AS `CNAME_date`, `CNAME`.flag AS `CNAME_flag` 
+FROM `CNAME` 
+WHERE `CNAME`.dns1 = %(dns1_1)s]
+[parameters: [immutabledict({})]]
+2020-12-12 14:20:58,928 - cdn_detector-django - INFO -  info, 成功请求domain:www.cuc.edu.cb
+2020-12-12 14:21:34,926 - cdn_detector-django - ERROR -  error, HTTP (sqlalchemy.exc.InvalidRequestError) Can't reconnect until invalid transaction is rolled back
+[SQL: SELECT `CNAME`.dns1 AS `CNAME_dns1`, `CNAME`.dns2 AS `CNAME_dns2`, `CNAME`.area AS `CNAME_area`, `CNAME`.date AS `CNAME_date`, `CNAME`.flag AS `CNAME_flag` 
+FROM `CNAME` 
+WHERE `CNAME`.dns1 = %(dns1_1)s]
+[parameters: [immutabledict({})]]
+2020-12-12 14:21:34,940 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 14:16:48,902 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 14:20:05,635 - cdn_detector-django - ERROR -  error, HTTP 'ww1.sinaimg.cn.w.alikunlun.COM.'
+2020-12-16 14:20:05,636 - cdn_detector-django - INFO -  info, 成功请求domain:www.sina.com
+2020-12-16 14:22:16,354 - cdn_detector-django - INFO -  info, 成功请求domain:pan.baidu.com
+2020-12-16 14:28:18,155 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 14:29:49,368 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 14:31:31,772 - cdn_detector-django - INFO -  info, 成功请求domain:aiqiyi.com
+2020-12-16 14:32:12,921 - cdn_detector-django - INFO -  info, 成功请求domain:www.aiqiyi.com.
+2020-12-16 14:32:15,679 - cdn_detector-django - INFO -  info, 成功请求domain:aiqiyi.com
+2020-12-16 14:32:29,393 - cdn_detector-django - ERROR -  error, HTTP (mysql.connector.errors.OperationalError) 2055: Lost connection to MySQL server at 'www.sunhanwu.top:3306', system error: 9 Bad file descriptor
+[SQL: SELECT `CNAME`.dns1 AS `CNAME_dns1`, `CNAME`.dns2 AS `CNAME_dns2`, `CNAME`.area AS `CNAME_area`, `CNAME`.date AS `CNAME_date`, `CNAME`.flag AS `CNAME_flag` 
+FROM `CNAME` 
+WHERE `CNAME`.dns1 LIKE %(dns1_1)s]
+[parameters: {'dns1_1': '%www.iqiyiweb.akadns.net.%'}]
+(Background on this error at: http://sqlalche.me/e/13/e3q8)
+2020-12-16 14:32:29,396 - cdn_detector-django - INFO -  info, 成功请求domain:www.iqiyi.com
+2020-12-16 14:32:29,523 - cdn_detector-django - INFO -  info, 成功请求domain:aqiyi.com
+2020-12-16 14:32:52,441 - cdn_detector-django - INFO -  info, 成功请求domain:iqiyi.com
+2020-12-16 14:35:04,653 - cdn_detector-django - INFO -  info, 成功请求domain:www.iqyi.com
+2020-12-16 14:35:55,662 - cdn_detector-django - INFO -  info, 成功请求domain:music.qq.com
+2020-12-16 14:38:37,531 - cdn_detector-django - INFO -  info, 成功请求domain:mail.qq.com
+2020-12-16 14:41:14,059 - cdn_detector-django - INFO -  info, 成功请求domain:www.a.shifen.com
+2020-12-16 14:42:17,494 - cdn_detector-django - INFO -  info, 成功请求domain:www.facebook.com
+2020-12-16 14:56:21,104 - cdn_detector-django - ERROR -  error, HTTP 
+2020-12-16 14:56:21,108 - cdn_detector-django - INFO -  info, 成功请求domain:www.facebook.com
+2020-12-16 15:08:33,364 - cdn_detector-django - ERROR -  error, HTTP 
+2020-12-16 15:08:33,366 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 15:27:32,329 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 15:32:41,835 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 15:35:45,545 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
