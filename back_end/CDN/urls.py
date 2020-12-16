@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('', views.listorders),
-    path('neo4j', views.listneo4j),
+    # path('neo4j', views.listneo4j),
 ]
