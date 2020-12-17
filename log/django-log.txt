@@ -91,3 +91,31 @@ WHERE `CNAME`.dns1 LIKE %(dns1_1)s]
 2020-12-16 15:32:41,835 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
 2020-12-16 15:35:45,545 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
 2020-12-16 16:22:16,110 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 16:26:44,387 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 16:27:38,505 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 16:27:58,400 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 16:32:18,195 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 16:32:32,070 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 16:34:46,643 - cdn_detector-django - ERROR -  error, HTTP tuple index out of range
+2020-12-16 16:34:46,648 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 16:37:20,935 - cdn_detector-django - INFO -  info, 成功请求domain:www.facebook.com
+2020-12-16 17:04:53,621 - cdn_detector-django - ERROR -  error, HTTP tuple index out of range
+2020-12-16 17:04:53,623 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 17:04:53,626 - cdn_detector-django - ERROR -  error, HTTP tuple index out of range
+2020-12-16 17:04:53,627 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 17:06:08,963 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 17:06:21,226 - cdn_detector-django - INFO -  info, 成功请求domain:www.facebook.com
+2020-12-16 17:07:44,517 - cdn_detector-django - INFO -  info, 成功请求domain:www.baidu.com
+2020-12-16 17:08:05,684 - cdn_detector-django - INFO -  info, 成功请求domain:www.google.com
+2020-12-16 17:13:49,886 - cdn_detector-django - INFO -  info, 成功请求domain:facebook.com
+2020-12-16 17:14:42,489 - cdn_detector-django - INFO -  info, 成功请求domain:music.qq.com
+2020-12-16 17:27:57,235 - cdn_detector-django - INFO -  info, 成功请求domain:bing.com
+2020-12-16 17:28:40,849 - cdn_detector-django - INFO -  info, 成功请求domain:tuque.com
+2020-12-16 17:29:05,305 - cdn_detector-django - INFO -  info, 成功请求domain:www.bauds.com
+2020-12-16 17:29:10,159 - cdn_detector-django - INFO -  info, 成功请求domain:www.bauds.com
+2020-12-16 17:29:40,352 - cdn_detector-django - INFO -  info, 成功请求domain:baike.baidu.com
+2020-12-16 17:30:58,267 - cdn_detector-django - INFO -  info, 成功请求domain:wikipedia.com
+2020-12-16 17:31:12,037 - cdn_detector-django - INFO -  info, 成功请求domain:wikipedia.com
+2020-12-16 17:31:32,091 - cdn_detector-django - INFO -  info, 成功请求domain:chihuahua.com
+2020-12-16 17:31:41,559 - cdn_detector-django - INFO -  info, 成功请求domain:chihuahua.com
+2020-12-16 17:31:57,675 - cdn_detector-django - INFO -  info, 成功请求domain:zhihu.com

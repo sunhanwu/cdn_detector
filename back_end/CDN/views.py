@@ -47,6 +47,7 @@ def listorders(request):
 def mysql(request,domain):
     # 数据库连接初始化
     try:
+        #ipdb.set_trace()
         op = operation(session)
         if op.is_exist(domain):
             pass
@@ -57,12 +58,13 @@ def mysql(request,domain):
         cname_all_list,a_all_list,cdn_list=op.op_select(domain)
         nodes,edges=mysql_neo4j(cname_all_list,a_all_list,cdn_list)
         neo4j_=(nodes,edges)
-        epdb.set_trace()
+        #ipdb.set_trace()
         if nodes == [] and edges == []:
             return HttpResponseBadRequest("{} 无结果".format(domain))
         else:
             return JsonResponse({'ret': 0, 'mysql_lists':a_all_list,"cdn_list":cdn_list,"neo4j_":neo4j_})
     except Exception as e:
+        logger.error("func mysql error: {}".format())
         return HttpResponseServerError("内部错误!")
 
 
