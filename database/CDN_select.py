@@ -11,13 +11,14 @@ def select_CDN(session):
     cdn_list=[]
     all_dns=set(session.query(CNAME.dns2).all())
     for cname in all_dns:
+        try:
+            ip_area=session.query(A.ip, A.area).filter_by(dns=cname[0]).all()
 
-        ip_area=session.query(A.ip, A.area).filter_by(dns=cname[0]).all()
-
-        ip_area=set(item[0][::-1].split(".",1)[1]+item[1] for item in ip_area)
-        if len(ip_area)>=2:
-            cdn_list.append(cname[0])
-
+            ip_area=set(item[0][::-1].split(".",1)[1]+item[1] for item in ip_area)
+            if len(ip_area)>=2:
+                cdn_list.append(cname[0])
+        except:
+            print(ip_area)
 
     return cdn_list,len(cdn_list)
 
