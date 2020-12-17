@@ -1,17 +1,17 @@
 import sys
 from py2neo import Graph
-sys.path.append('/home/sunhanwu/cdn_detector')
+sys.path.append('')
 db_config = {
-    'host': 'www.sunhanwu.top',
-    'port': 3306,
-    'user': 'cdn_user',
-    'password': 'cdn_123456',
-    'database': 'cdn'
+    'host': '',
+    'port': ,
+    'user': '',
+    'password': '',
+    'database': ''
 }
 neo_graph = Graph(
-    "http://node1.sunhanwu.top:7474",
-     username="neo4j",
-     password="sunhanwu"
+    "",
+     username="",
+     password=""
 )
 
 with open('../dns_query/dns_servers.txt', 'r',encoding="utf-8") as f:
@@ -21,19 +21,19 @@ ip2name = {v:k for k, v in serverNames.items()}
 node_info = {
     'node1':{
         'deploy':{
-            'ip': 'node1.sunhanwu.top',
+            'ip': '',
             'port': 6009
         }
     },
     'node2':{
         'deploy':{
-            'ip': 'node2.sunhanwu.top',
+            'ip': '',
             'port': 6010
         }
     },
     'node3':{
         'proxy': {
-            'proxy_ip': 'node3.sunhanwu.top',
+            'proxy_ip': '',
             'proxy_port': 6009,
         },
         'deploy': {
@@ -42,7 +42,7 @@ node_info = {
     },
     'node4':{
         'deploy':{
-            'ip':'node4.sunhanwu.top',
+            'ip':'',
             'port':6009
         }
     }
